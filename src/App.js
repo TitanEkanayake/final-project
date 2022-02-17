@@ -14,7 +14,14 @@ import CustomerDash from "./components/pages/CustomerDash";
 import { useLocation } from "react-router-dom";
 import Sidebar from "./components/layouts/Sidebar";
 
-const navEnabled = ["/", "/aboutus", "/Contactus", "/Selection"];
+const navEnabled = [
+  "/",
+  "/aboutus",
+  "/Contactus",
+  "/Selection",
+  "/CustomerLogin",
+  "/Companylogin",
+];
 const sideEnabled = ["/customerdash"];
 
 const App = () => {

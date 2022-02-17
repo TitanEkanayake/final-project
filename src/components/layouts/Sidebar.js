@@ -29,21 +29,11 @@ const Sidebar = () => {
     <>
       <div id="header">
         {/* collapsed props to change menu size using menucollapse state */}
-        <ProSidebar collapsed={menuCollapse}>
+        <ProSidebar>
           <SidebarHeader>
             <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p>
-                {menuCollapse ? (
-                  <i className="fas fa-atlas" />
-                ) : (
-                  "Reservation.LK "
-                )}
-              </p>
-            </div>
-            <div className="closemenu" onClick={menuIconClick}>
-              {/* changing menu collapse icon on click */}
-              {menuCollapse ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+              <p>{"Reservation.LK "}</p>
             </div>
           </SidebarHeader>
           <SidebarContent>

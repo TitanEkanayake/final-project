@@ -1,0 +1,9 @@
+div.card {
+  width: 18rem;
+  align-items: baseline;
+  left: 300px;
+  top: 100px;
+}
+div.hero-container4 {
+  background-color: aqua;
+}
