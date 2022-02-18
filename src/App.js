@@ -13,6 +13,7 @@ import CompanyLogin from "./components/pages/CompanyLogin";
 import CustomerDash from "./components/pages/CustomerDash";
 import { useLocation } from "react-router-dom";
 import Sidebar from "./components/layouts/Sidebar";
+import Customerprofile from "./components/pages/Customerprofile";
 
 const navEnabled = [
   "/",
@@ -22,7 +23,7 @@ const navEnabled = [
   "/CustomerLogin",
   "/Companylogin",
 ];
-const sideEnabled = ["/customerdash"];
+const sideEnabled = ["/customerdash", "/Customerprofile"];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/CustomerLogin" element={<CustomerLogin />} />
         <Route path="/Companylogin" element={<CompanyLogin />} />
         <Route path="/Customerdash" element={<CustomerDash />} />
+        <Route path="/Customerprofile" element={<Customerprofile />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>
