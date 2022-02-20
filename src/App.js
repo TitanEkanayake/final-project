@@ -12,8 +12,8 @@ import CustomerLogin from "./components/pages/CustomerLogin";
 import CompanyLogin from "./components/pages/CompanyLogin";
 import CustomerDash from "./components/pages/CustomerDash";
 import { useLocation } from "react-router-dom";
-import Sidebar from "./components/layouts/Sidebar";
 import Customerprofile from "./components/pages/Customerprofile";
+import Dashnav from "./components/layouts/Dashnav";
 
 const navEnabled = [
   "/",
@@ -36,7 +36,7 @@ const App = () => {
   return (
     <div className="app">
       {enableNav() && <Navigationbar />}
-      {enableside() && <Sidebar />}
+      {enableside() && <Dashnav />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Aboutus" element={<Aboutus />} />

@@ -20,7 +20,7 @@ const CustomerDash = () => {
   const renderCard = (card, index) => {
     return (
       <>
-        <Card style={{ width: "18rem" }} key={index}>
+        <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
             <Card.Title>{card.title}</Card.Title>
