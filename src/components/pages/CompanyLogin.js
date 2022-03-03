@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 class CompanyLogin extends Component {
   render() {
     return (
-      <div className="hero-container3">
+      <div className="hero-containerx">
         <div>
           <div className="login-wrap1">
             <div className="login-html">

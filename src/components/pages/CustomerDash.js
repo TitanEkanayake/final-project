@@ -1,23 +1,29 @@
 import React from "react";
 import "./CustomerDash.css";
-import { Container, Row, Card, Button } from "react-bootstrap";
+import { Row, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const CustomerDash = () => {
+  let navigate = useNavigate();
   const cardInfo = [
     {
+      id: 1,
       image:
         "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      title: "Lebron James",
-      text: "THE GOAT",
+      title: "Cylon Hospitals.LTD",
+      text: "Reserve Spot for medicine, Channeling",
+      text1: "Reservation in to your door steps",
     },
     {
+      id: 2,
       image:
         "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      title: "Alex Caruso",
-      text: "THE TRUE GOAT",
+      title: "Imigation Department",
+      text: "create your pass portaaaaaaaaaaaaaaaaaaaaaaaaa",
+      text2: " reserve your passport",
     },
   ];
-  const renderCard = (card, index) => {
+  const renderCard = (card) => {
     return (
       <>
         <Card style={{ width: "18rem", margin: "10px" }}>
@@ -25,12 +31,33 @@ const CustomerDash = () => {
           <Card.Body>
             <Card.Title>{card.title}</Card.Title>
             <Card.Text>{card.text}</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Card.Text>{card.text1}</Card.Text>
+            <Card.Text>{card.text2}</Card.Text>
+            <Button
+              onClick={() => navigate(`/CustomerInsdeRes/${card.id}`)}
+              variant="primary"
+            ></Button>
           </Card.Body>
         </Card>
       </>
     );
   };
-  return <div className="cards">{cardInfo.map(renderCard)}</div>;
+  return (
+    <div className="hero-containery">
+      <div class="search-box">
+        <button class="btn-search">
+          <i class="fas fa-search"></i>
+        </button>
+        <input
+          type="text"
+          class="input-search"
+          placeholder="Type to Search..."
+        />
+      </div>
+      <div className="cards">
+        <Row>{cardInfo.map(renderCard)}</Row>
+      </div>
+    </div>
+  );
 };
 export default CustomerDash;

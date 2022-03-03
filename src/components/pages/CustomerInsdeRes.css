@@ -1,0 +1,66 @@
+.card {
+  left: 300px;
+  top: 100px;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 10px;
+}
+div.hero-container6 {
+  height: 100vh;
+}
+
+div.cards {
+  margin: 0px;
+}
+* {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+
+/*welcome*/
+div.hero-container-welcome {
+  background-image: url(../../assets/videos/img1.jpg);
+  height: 35vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.hero-container-welcome > h1 {
+  color: #fff;
+  font-size: 100px;
+  text-align: center;
+}
+
+div.hero-container-welcome > p {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 32px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+  div.hero-container-welcome > h1 {
+    font-size: 70px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div.hero-container-welcome > h1 {
+    font-size: 50px;
+    text-align: center;
+  }
+
+  div.hero-container-welcome > p {
+    font-size: 30px;
+    text-align: center;
+  }
+}

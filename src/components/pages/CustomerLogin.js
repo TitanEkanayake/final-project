@@ -98,7 +98,9 @@ class CustomerLogin extends Component {
                     <input id="pass" type="text" className="input" />
                   </div>
                   <div className="group">
-                    <input type="submit" className="button" value="Sign Up" />
+                    <Link to="/CustomerLogin">
+                      <input type="submit" className="button" value="Sign Up" />
+                    </Link>
                   </div>
                   <div className="hr"></div>
                   <div className="foot-lnk">

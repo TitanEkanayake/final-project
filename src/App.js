@@ -14,6 +14,8 @@ import CustomerDash from "./components/pages/CustomerDash";
 import { useLocation } from "react-router-dom";
 import Customerprofile from "./components/pages/Customerprofile";
 import Dashnav from "./components/layouts/Dashnav";
+import CustomerRes from "./components/pages/CustomerRes";
+import CustomerInsdeRes from "./components/pages/CustomerInsdeRes";
 
 const navEnabled = [
   "/",
@@ -23,7 +25,12 @@ const navEnabled = [
   "/CustomerLogin",
   "/Companylogin",
 ];
-const sideEnabled = ["/customerdash", "/Customerprofile"];
+const sideEnabled = [
+  "/customerdash",
+  "/Customerprofile",
+  "/CustomerRes",
+  "/CustomerInsdeRes",
+];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -46,6 +53,8 @@ const App = () => {
         <Route path="/Companylogin" element={<CompanyLogin />} />
         <Route path="/Customerdash" element={<CustomerDash />} />
         <Route path="/Customerprofile" element={<Customerprofile />} />
+        <Route path="/CustomerRes" element={<CustomerRes />} />
+        <Route path="/CustomerInsdeRes/:id" element={<CustomerInsdeRes />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>
