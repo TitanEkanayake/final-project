@@ -33,22 +33,22 @@ div.form-group {
 }
 
 /*.containerz::after {
-  content: "";
-  /*opacity: 0.8;
-  background: rgba(31, 30, 30, 0.041) url(../../assets/videos/img2.jpg)
-    no-repeat fixed top;
-  background-blend-mode: luminosity;
-  /* also change the blend mode to what suits you, from darken, to other 
-  many options as you deem fit
-  background-size: cover;
-  top: 0;
-  left: -170px;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  z-index: -1;
-  height: 100vh;
-}*/
+    content: "";
+    /*opacity: 0.8;
+    background: rgba(31, 30, 30, 0.041) url(../../assets/videos/img2.jpg)
+      no-repeat fixed top;
+    background-blend-mode: luminosity;
+    /* also change the blend mode to what suits you, from darken, to other 
+    many options as you deem fit
+    background-size: cover;
+    top: 0;
+    left: -170px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+  }*/
 div.imgPreview {
   text-align: center;
   margin: 5px 15px;
@@ -68,12 +68,12 @@ div.previewText {
   margin-top: 20px;
 }
 /*.col-md-6 {
-  margin-left: 790px;
-  margin-top: 50px;
-}
-.btn-danger {
-  margin-bottom: 50px;
-}*/
+    margin-left: 790px;
+    margin-top: 50px;
+  }
+  .btn-danger {
+    margin-bottom: 50px;
+  }*/
 .button {
   display: inline-block;
   /*vertical-align: top;*/

@@ -36,7 +36,9 @@ const CustomerDash = () => {
             <Button
               onClick={() => navigate(`/CustomerInsdeRes/${card.id}`)}
               variant="primary"
-            ></Button>
+            >
+              Reserve
+            </Button>
           </Card.Body>
         </Card>
       </>

@@ -16,6 +16,7 @@ import Customerprofile from "./components/pages/Customerprofile";
 import Dashnav from "./components/layouts/Dashnav";
 import CustomerRes from "./components/pages/CustomerRes";
 import CustomerInsdeRes from "./components/pages/CustomerInsdeRes";
+import Walktrough from "./components/customerPages/Walktrough";
 
 const navEnabled = [
   "/",
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/Customerprofile" element={<Customerprofile />} />
         <Route path="/CustomerRes" element={<CustomerRes />} />
         <Route path="/CustomerInsdeRes/:id" element={<CustomerInsdeRes />} />
+        <Route path="/Walktrough" element={<Walktrough />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>

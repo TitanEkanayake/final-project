@@ -71,12 +71,6 @@ class CompanyLogin extends Component {
                   </div>
                   <div className="group">
                     <label for="pass" className="label">
-                      Company ID
-                    </label>
-                    <input id="pass" type="text" className="input" />
-                  </div>
-                  <div className="group">
-                    <label for="pass" className="label">
                       Password
                     </label>
                     <input

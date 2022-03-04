@@ -35,6 +35,7 @@ const CustomerInsdeRes = () => {
             <Button
               onClick={() => navigate(`CustomerInsdeRes/${card.id}`)}
               variant="primary"
+              placeholder="First Name"
             >
               Reserve
             </Button>

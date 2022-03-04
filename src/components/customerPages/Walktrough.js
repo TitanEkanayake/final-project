@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "./Customerprofile.css";
 
-class CustomerProfile extends Component {
+export default class Walktrough extends Component {
   constructor(props) {
     super(props);
     this.state = { file: "", imagePreviewUrl: "" };
@@ -138,4 +137,3 @@ class CustomerProfile extends Component {
     );
   }
 }
-export default CustomerProfile;
