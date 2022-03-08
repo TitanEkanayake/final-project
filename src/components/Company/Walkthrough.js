@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import "./Walkthrough.css";
+import { Link } from "react-router-dom";
 
-export default class Walktrough extends Component {
+class Walkthrough extends Component {
   constructor(props) {
     super(props);
     this.state = { file: "", imagePreviewUrl: "" };
@@ -57,23 +59,36 @@ export default class Walktrough extends Component {
                 </form>
                 <div className="imgPreview">{$imagePreview}</div>
               </div>
+              <br />
               <div className="form-group">
-                <label className="control-label col-md-2">Name</label>
+                <label className="control-label col-md-2">Coampany Type</label>
                 <div className="col-md-1">
                   <select required className="form-control">
-                    <option>Mr</option>
-                    <option>Mrs</option>
+                    <option>Common Company</option>
+                    <option>Medical</option>
                   </select>
                 </div>
+                <br />
+                <label className="control-label col-md-2">
+                  Public or Private
+                </label>
+                <div className="col-md-1">
+                  <select required className="form-control">
+                    <option>Private</option>
+                    <option>Public</option>
+                  </select>
+                </div>
+                <br />
                 <div className="col-md-3">
                   <input
                     required
                     className="form-control"
                     maxlenth="20"
                     minlenth="2"
-                    placeholder="First Name"
+                    placeholder="Company Sector"
                   />
                 </div>
+                <br />
                 <div className="col-md-3">
                   <input
                     required
@@ -85,7 +100,10 @@ export default class Walktrough extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label className="control-label col-md-2">Age</label>
+                <label className="control-label col-md-2">
+                  Company Age and start date
+                </label>
+                <br />
                 <div className="col-md-2">
                   <input
                     required
@@ -94,41 +112,26 @@ export default class Walktrough extends Component {
                     placeholder=" years"
                     min={0}
                   />
+                  <br />
                   <input required className="form-control" type="date" />
                 </div>
+                <br />
               </div>
-              <div className="form-group">
-                <label className="control-label col-md-2">Contact</label>
-                <div className="col-md-7">
-                  <input
-                    required
-                    className="form-control"
-                    placeholder="E-mail"
-                    type="email"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-md-7 col-md-offset-2">
-                  <input
-                    required
-                    className="form-control"
-                    type="number"
-                    placeholder="Phone (xxx)-xxx xxxx"
-                  />
-                </div>
-              </div>
-              <div className="button">
+              <div className="buttonp">
                 <div className="col-md-6 col-md-offset-2">
-                  <button type="button" className="btn btn-primary">
-                    Update Profile
-                  </button>
+                  <Link to="/ComDash">
+                    <button type="button" className="btn btn-primary">
+                      Next
+                    </button>
+                  </Link>
                 </div>
               </div>
-              <div className="button">
-                <button type="button" className="btn btn-danger">
-                  Cancel
-                </button>
+              <div className="buttonp">
+                <Link to="/companylogin">
+                  <button type="button" className="btn btn-danger">
+                    Cancel
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
@@ -137,3 +140,4 @@ export default class Walktrough extends Component {
     );
   }
 }
+export default Walkthrough;

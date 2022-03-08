@@ -110,7 +110,7 @@ class CompanyLogin extends Component {
                     <input id="pass" type="text" className="input" />
                   </div>
                   <div className="group">
-                    <Link to="/CompanyLogin">
+                    <Link to="/walkthrough">
                       <input type="submit" className="button" value="Sign Up" />
                     </Link>
                   </div>

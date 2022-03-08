@@ -16,7 +16,9 @@ import Customerprofile from "./components/pages/Customerprofile";
 import Dashnav from "./components/layouts/Dashnav";
 import CustomerRes from "./components/pages/CustomerRes";
 import CustomerInsdeRes from "./components/pages/CustomerInsdeRes";
-import Walktrough from "./components/customerPages/Walktrough";
+import Walkthrough from "./components/Company/Walkthrough";
+import Compside from "./components/layouts/Compside";
+import { ComDash } from "./components/Company/ComDash";
 
 const navEnabled = [
   "/",
@@ -32,6 +34,7 @@ const sideEnabled = [
   "/CustomerRes",
   "/CustomerInsdeRes",
 ];
+const sideEnabled2 = ["/ComDash"];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -41,10 +44,14 @@ const App = () => {
   const enableside = () =>
     sideEnabled.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
     -1;
+  const enableside2 = () =>
+    sideEnabled2.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
+    -1;
   return (
     <div className="app">
       {enableNav() && <Navigationbar />}
       {enableside() && <Dashnav />}
+      {enableside2() && <Compside />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Aboutus" element={<Aboutus />} />
@@ -56,7 +63,8 @@ const App = () => {
         <Route path="/Customerprofile" element={<Customerprofile />} />
         <Route path="/CustomerRes" element={<CustomerRes />} />
         <Route path="/CustomerInsdeRes/:id" element={<CustomerInsdeRes />} />
-        <Route path="/Walktrough" element={<Walktrough />} />
+        <Route path="/walkthrough" element={<Walkthrough />} />
+        <Route path="/ComDash" element={<ComDash />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>
