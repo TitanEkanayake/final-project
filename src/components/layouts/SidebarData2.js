@@ -5,26 +5,32 @@ import * as BiIcons from "react-icons/bi";
 
 export const SidebarData2 = [
   {
-    title: "Home",
-    path: "/Dashboard",
+    title: "Dashboard",
+    path: "/ComDash",
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
   {
-    title: "Profile",
-    path: "/Records",
-    icon: <FaIcons.FaUserAlt />,
+    title: "Company Profile",
+    path: "/ComProfile",
+    icon: <AiIcons.AiFillProfile />,
     cName: "nav-text",
   },
   {
-    title: "Reservations",
-    path: "/CustomerRes",
+    title: "Records",
+    path: "/Records",
     icon: <AiIcons.AiFillBook />,
     cName: "nav-text",
   },
   {
+    title: "Customer Reservations",
+    path: "/CustomerRes",
+    icon: <FaIcons.FaUserAlt />,
+    cName: "nav-text",
+  },
+  {
     title: "Logout",
-    path: "/CustomerLogin",
+    path: "/CompanyLogin",
     icon: <BiIcons.BiLogOut />,
     cName: "nav-text",
   },

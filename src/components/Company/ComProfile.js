@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import styles from "./Walkthrough.module.css";
-import { Link } from "react-router-dom";
+import styles from "./ComProfile.module.css";
 
-class Walkthrough extends Component {
+export default class ComProfile extends Component {
   constructor(props) {
     super(props);
     this.state = { file: "", imagePreviewUrl: "" };
@@ -29,7 +28,7 @@ class Walkthrough extends Component {
     if (imagePreviewUrl) {
       $imagePreview = <img src={imagePreviewUrl} />;
     } else {
-      $imagePreview = <div className="previewText">Profile Picture</div>;
+      $imagePreview = <div className={styles.previewText}>Profile Picture</div>;
     }
     return (
       <div className={styles.bg0}>
@@ -48,8 +47,9 @@ class Walkthrough extends Component {
         <div className={styles.containerz}>
           <div className={styles.form_c}>
             <form className={styles.form_horizontal}>
-              <h4 className="form-header">Fill The From</h4>
-              <div className="previewComponent">
+              <h4 className={styles.form_header}>Fill The From</h4>
+              <br />
+              <div className={styles.previewComponent}>
                 <form onSubmit={(e) => this._handleSubmit(e)}>
                   <input
                     className="fileInput"
@@ -57,57 +57,44 @@ class Walkthrough extends Component {
                     onChange={(e) => this._handleImageChange(e)}
                   />
                 </form>
+                <br />
                 <div className={styles.imgPreview}>{$imagePreview}</div>
               </div>
-              <br />
               <div className={styles.form_group}>
-                <label className="control-label col-md-2">Coampany Type</label>
+                <label className="control-label col-md-2">Name</label>
                 <div className="col-md-1">
-                  <select required className={styles.form_control}>
-                    <option>Common Company</option>
-                    <option>Medical</option>
+                  <select required className="form-control">
+                    <option>Mr</option>
+                    <option>Mrs</option>
                   </select>
                 </div>
-                <br />
-                <label className="control-label col-md-2">
-                  Public or Private
-                </label>
-                <div className="col-md-1">
-                  <select required className={styles.form_control}>
-                    <option>Private</option>
-                    <option>Public</option>
-                  </select>
-                </div>
-                <br />
                 <div className="col-md-3">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     maxlenth="20"
                     minlenth="2"
-                    placeholder="Company Sector"
+                    placeholder="First Name"
                   />
                 </div>
-                <br />
                 <div className="col-md-3">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     maxlenth="20"
                     minlenth="2"
                     placeholder="Last Name"
                   />
                 </div>
               </div>
+              <br />
               <div className={styles.form_group}>
-                <label className="control-label col-md-2">
-                  Company Age and start date
-                </label>
-                <br />
+                <label className="control-label col-md-2">Age</label>
+
                 <div className="col-md-2">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     type="number"
                     placeholder=" years"
                     min={0}
@@ -115,25 +102,59 @@ class Walkthrough extends Component {
                 </div>
                 <br />
                 <div className="col-md-2">
-                  <input required className={styles.form_control} type="date" />
+                  <input required className="form-control" type="date" />
                 </div>
-                <br />
               </div>
-              <div className="buttonp">
+              <br />
+              <div className={styles.form_group}>
+                <label className="control-label col-md-2">Address</label>
+                <div className="col-md-7">
+                  <input
+                    required
+                    className="form-control"
+                    placeholder="Address"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <br />
+              <div className={styles.form_group}>
+                <label className="control-label col-md-2">Contact</label>
+                <div className="col-md-7">
+                  <input
+                    required
+                    className="form-control"
+                    placeholder="E-mail"
+                    type="email"
+                  />
+                </div>
+              </div>
+
+              <br />
+              <div className={styles.form_group}>
+                <div className="col-md-7 col-md-offset-2">
+                  <input
+                    required
+                    className="form-control"
+                    type="number"
+                    placeholder="Phone (xxx)-xxx xxxx"
+                  />
+                </div>
+              </div>
+              <br />
+              <div className={styles.button}>
                 <div className="col-md-6 col-md-offset-2">
-                  <Link to="/ComDash">
-                    <button type="button" className="btn btn-primary">
-                      Next
-                    </button>
-                  </Link>
+                  <button type="button" className="btn btn-primary">
+                    Update Profile
+                  </button>
                 </div>
               </div>
-              <div className="buttonp">
-                <Link to="/companylogin">
-                  <button type="button" className="btn btn-danger">
-                    Cancel
-                  </button>
-                </Link>
+              <br />
+              <div className={styles.button}>
+                <button type="button" className="btn btn-danger">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
@@ -142,4 +163,3 @@ class Walkthrough extends Component {
     );
   }
 }
-export default Walkthrough;

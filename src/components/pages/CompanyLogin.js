@@ -53,11 +53,11 @@ class CompanyLogin extends Component {
                     </Form>
                   </div>
                   <div className="group">
-                    <Link to="/">
+                    <Link to="/ComDash">
                       <input type="submit" className="button" value="Sign In" />
                     </Link>
                   </div>
-                  <div className="hr"></div>
+                  <div className="hr" />
                   <div className="foot-lnk">
                     <a href="#forgot">Forgot Password?</a>
                   </div>
@@ -114,7 +114,7 @@ class CompanyLogin extends Component {
                       <input type="submit" className="button" value="Sign Up" />
                     </Link>
                   </div>
-                  <div className="hr"></div>
+                  <div className="hr" />
                   <div className="foot-lnk">
                     <label for="tab-1">Already Member?</label>
                   </div>
