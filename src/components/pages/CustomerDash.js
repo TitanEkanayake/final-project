@@ -1,9 +1,21 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "./CustomerDash.css";
+import { db } from "../../Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
-const CustomerDash = () => {
+function CustomerDash() {
+  const [users, setusers] = useState([]);
+  const userCollectionRef = collection(db, "company");
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(userCollectionRef);
+      setusers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+  });
+
   let navigate = useNavigate();
   const cardInfo = [
     {
@@ -48,7 +60,7 @@ const CustomerDash = () => {
     <div className="hero-containery">
       <div class="search-box">
         <button class="btn-search">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search" />
         </button>
         <input
           type="text"
@@ -61,5 +73,5 @@ const CustomerDash = () => {
       </div>
     </div>
   );
-};
+}
 export default CustomerDash;

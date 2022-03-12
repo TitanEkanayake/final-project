@@ -1,0 +1,70 @@
+.ComAddform {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 270px;
+  padding-top: 100px;
+  padding-right: 870px;
+}
+.formcon {
+  background-color: rgb(15, 122, 194);
+  opacity: 0.95;
+  overflow: auto;
+  min-width: 500px;
+  min-height: 300px;
+  -webkit-box-shadow: 10px 10px 10px 10px #b0b0b0;
+  box-shadow: 10px 10px 10px 10px #b0b0b0;
+  outline: 4px solid #1c9fc7;
+  outline-offset: 0px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.input_box {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 10px;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.button-section {
+  margin: 3px;
+}
+.button {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: dodgerblue;
+  border: 1px solid rgb(21, 113, 199);
+  color: white;
+  cursor: pointer;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.button:hover {
+  background-color: royalblue;
+}
+
+.remove {
+  background-color: rgb(192, 53, 53);
+}
+.remove:hover {
+  background-color: rgb(187, 43, 43);
+}

@@ -20,6 +20,7 @@ import Walkthrough from "./components/Company/Walkthrough";
 import Compside from "./components/layouts/Compside";
 import { ComDash } from "./components/Company/ComDash";
 import ComProfile from "./components/Company/ComProfile";
+import ComAddform from "./components/Company/ComAddform";
 
 const navEnabled = [
   "/",
@@ -35,7 +36,7 @@ const sideEnabled = [
   "/CustomerRes",
   "/CustomerInsdeRes",
 ];
-const sideEnabled2 = ["/ComDash", "/ComProfile"];
+const sideEnabled2 = ["/ComDash", "/ComProfile", "/ComAddform"];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -67,6 +68,7 @@ const App = () => {
         <Route path="/walkthrough" element={<Walkthrough />} />
         <Route path="/ComDash" element={<ComDash />} />
         <Route path="/ComProfile" element={<ComProfile />} />
+        <Route path="/ComAddform" element={<ComAddform />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>

@@ -38,7 +38,6 @@ export default class ComProfile extends Component {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
         />
-
         <link rel="stylesheet" href="style.css" />
         <link
           href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"

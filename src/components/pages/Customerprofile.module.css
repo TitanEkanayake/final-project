@@ -1,10 +1,9 @@
 .containerz {
-  background-image: url("https://images.unsplash.com/photo-1565688103955-d38e06888776?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80");
-  object-fit: cover;
+  background-image: url(../../assets/videos/img4.jpg);
+  height: 100vh;
   overflow: auto;
   min-width: 500px;
   min-height: 300px;
-  height: 100%;
   z-index: -1;
   transform: "translate(-50%,-50%)";
   background-position: center;
@@ -12,9 +11,9 @@
   background-size: cover;
 }
 .form_c {
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 100px;
-  padding-left: 370px;
+  padding-left: 270px;
   padding-right: 600px;
   margin-left: 100px;
   position: center;
@@ -23,20 +22,21 @@
 }
 
 .form_horizontal {
-  background-color: rgb(216, 225, 231);
-  opacity: 0.95;
+  background-color: rgb(30, 107, 131);
   overflow: auto;
   min-width: 500px;
   min-height: 300px;
-  -webkit-box-shadow: 10px 10px 10px 10px #b0b0b0;
-  box-shadow: 10px 10px 10px 10px #b0b0b0;
-  outline: 4px solid #1c9fc7;
-  outline-offset: 0px;
+  -webkit-box-shadow: 10px 10px 10px 10px #080808;
+  box-shadow: 10px 10px 10px 10px #111111;
+  padding: 10px;
+  position: relative;
+  color: rgb(255, 254, 254);
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
+  opacity: 0.8;
 }
 
-div.col-md-3 {
+div.col_md_3 {
   padding-top: 10px;
 }
 div.form_group {
@@ -45,42 +45,32 @@ div.form_group {
 
 div.imgPreview {
   text-align: center;
-  margin: 5px 15px;
+  margin: 8px 0px;
   height: 100px;
   width: 100px;
   border-left: 1px solid #000000;
   border-right: 1px solid #000000;
   border-top: 1px solid #000000;
   border-bottom: 1px solid #000000;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
 }
 div.imgPreview img {
   width: 100%;
   height: 100%;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
 }
 div.previewText {
   width: 100%;
   margin-top: 20px;
 }
-
 .button {
   display: inline-block;
-  /*vertical-align: top;*/
-  height: 40px;
-  line-height: 40px;
-  margin: 4px;
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  margin: 10px;
   margin-bottom: 30px;
   text-align: center;
-}
-@media screen and (max-width: 960px) {
-  .containerz > .form_c {
-    font-size: 20px;
-    padding-top: 30px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .containerz > .form_c {
-    font-size: 50px;
-    padding-top: 30px;
-  }
 }
