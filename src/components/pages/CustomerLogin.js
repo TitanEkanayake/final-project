@@ -3,12 +3,17 @@ import "./CustomerLogin.css";
 import { auth } from "../../Firebase_con";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 function CustomerLogin() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [loginUsername, setLoginUsername] = useState("");
+  const [registerUsername, setRegisterUsername] = useState("");
+  const [loginEmail, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const register = async () => {
@@ -16,15 +21,29 @@ function CustomerLogin() {
       const user = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
-        registerPassword
+        registerPassword,
+        registerUsername
       );
       console.log(user);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const login = async () => {};
-  const logout = async () => {};
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   return (
     <div className="hero-container2">
@@ -49,7 +68,7 @@ function CustomerLogin() {
               <div className="sign-in-htm">
                 <div className="group">
                   <label for="user" className="label">
-                    Username
+                    Email
                   </label>
                   <input
                     required
@@ -87,7 +106,12 @@ function CustomerLogin() {
                 </div>
                 <div className="group">
                   <Link to="/CustomerDash">
-                    <input type="submit" className="button" value="Sign In" />
+                    <input
+                      onClick={login}
+                      type="submit"
+                      className="button"
+                      value="Sign In"
+                    />
                   </Link>
                 </div>
                 <div className="hr" />
@@ -100,7 +124,12 @@ function CustomerLogin() {
                   <label for="user" className="label">
                     Username
                   </label>
-                  <input className="input" />
+                  <input
+                    onChange={(event) => {
+                      setRegisterUsername(event.target.value);
+                    }}
+                    className="input"
+                  />
                 </div>
                 <div className="group">
                   <label for="pass" className="label">
@@ -123,6 +152,8 @@ function CustomerLogin() {
                     onChange={(event) => {
                       setRegisterPassword(event.target.value);
                     }}
+                    maxlenth="20"
+                    minlenth="6"
                     id="pass"
                     type="password"
                     className="input"

@@ -5,11 +5,17 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Dashnav.css";
 import { IconContext } from "react-icons";
+import { auth } from "../../Firebase_con";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 
 function Dashnav() {
   const [Sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!Sidebar);
+
+  const logout = async () => {
+    await signOut(auth);
+  };
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -28,7 +34,7 @@ function Dashnav() {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <Link to={item.path}>
+                  <Link to={item.path} onClick={logout}>
                     {item.icon}
                     <span>{item.title}</span>
                   </Link>

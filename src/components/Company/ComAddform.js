@@ -45,6 +45,7 @@ const ComAddform = () => {
   return (
     <div className="ComAddform">
       <div className="formcon">
+        <h1>Add your fields</h1>
         <form onSubmit={handleSubmit1}>
           {formValues1.map((element, index) => (
             <div className="form-inline" key={index}>
