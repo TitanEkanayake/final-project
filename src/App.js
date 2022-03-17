@@ -21,6 +21,10 @@ import Compside from "./components/layouts/Compside";
 import { ComDash } from "./components/Company/ComDash";
 import ComProfile from "./components/Company/ComProfile";
 import ComAddform from "./components/Company/ComAddform";
+import CustomerResFrom from "./components/pages/CustomerResFrom";
+import Comtemp1 from "./components/Company/Comtemp1";
+import Comtemp2 from "./components/Company/Comtemp2";
+import ComRecords from "./components/Company/ComRecords";
 
 const navEnabled = [
   "/",
@@ -35,8 +39,16 @@ const sideEnabled = [
   "/Customerprofile",
   "/CustomerRes",
   "/CustomerInsdeRes",
+  "/CustomerResFrom",
 ];
-const sideEnabled2 = ["/ComDash", "/ComProfile", "/ComAddform"];
+const sideEnabled2 = [
+  "/ComDash",
+  "/ComProfile",
+  "/ComAddform",
+  "/Comtemp1",
+  "/Comtemp2",
+  "/ComRecords",
+];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -69,6 +81,10 @@ const App = () => {
         <Route path="/ComDash" element={<ComDash />} />
         <Route path="/ComProfile" element={<ComProfile />} />
         <Route path="/ComAddform" element={<ComAddform />} />
+        <Route path="/CustomerResFrom" element={<CustomerResFrom />} />
+        <Route path="/Comtemp1" element={<Comtemp1 />} />
+        <Route path="/Comtemp2" element={<Comtemp2 />} />
+        <Route path="/ComRecords" element={<ComRecords />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>

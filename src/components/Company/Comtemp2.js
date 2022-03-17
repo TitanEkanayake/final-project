@@ -1,66 +1,33 @@
-import React, { Component } from "react";
-import styles from "./Customerprofile.module.css";
+import React from "react";
+import styles from "./Comtemp2.module.css";
 import { Link } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import Stack from "@mui/material/Stack";
 
-class CustomerProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { file: "", imagePreviewUrl: "" };
-  }
+const Comtemp2 = () => {
+  const [value, setValue] = React.useState(new Date());
+  return (
+    <div className={styles.bg0}>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      />
 
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-
-    reader.readAsDataURL(file);
-  }
-  render() {
-    let { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} />;
-    } else {
-      $imagePreview = <div className={styles.previewText}>Profile Picture</div>;
-    }
-    return (
+      <link rel="stylesheet" href="style.css" />
+      <link
+        href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+        rel="stylesheet"
+      />
       <div className={styles.containerz}>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        />
-
-        <link rel="stylesheet" href="style.css" />
-        <link
-          href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
-          rel="stylesheet"
-        />
-
         <div className={styles.form_c}>
           <form className={styles.form_horizontal}>
-            <h4 className={styles.form_header}>Fill The From</h4>
-            <div className={styles.previewComponent}>
-              <form onSubmit={(e) => this._handleSubmit(e)}>
-                <input
-                  className="fileInput"
-                  type="file"
-                  onChange={(e) => this._handleImageChange(e)}
-                />
-              </form>
-              <div className={styles.imgPreview}>{$imagePreview}</div>
-            </div>
+            <h4 className="form-header">Fill The From</h4>
             <div className={styles.form_group}>
-              <label className="control-label col-md-2">Name</label>
               <div className="col-md-3">
                 <input
                   required
@@ -88,31 +55,32 @@ class CustomerProfile extends Component {
                   <option>Female</option>
                 </select>
               </div>
-              <label className="control-label col-md-2">Address</label>
-              <div className="col-md-7">
-                <input
-                  required
-                  className="form-control"
-                  placeholder="Street Address"
-                  type="text"
-                />
-                <br />
-                <input
-                  required
-                  className="form-control"
-                  maxlenth="20"
-                  minlenth="2"
-                  placeholder="City"
-                />
-              </div>
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Date of birth</label>
+              <br />
               <div className="col-md-2">
                 <input required className="form-control" type="date" />
               </div>
               <br />
-
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={3}>
+                  <DateTimePicker
+                    renderInput={(params) => <TextField {...params} />}
+                    label="Select a date"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    minDate={new Date("2020-02-14")}
+                    minTime={new Date(0, 0, 0, 8)}
+                    maxTime={new Date(0, 0, 0, 18, 45)}
+                  />
+                </Stack>
+              </LocalizationProvider>
+              <br />
+            </div>
+            <div className={styles.form_group}>
               <label className="control-label col-md-2">Contact</label>
               <div className="col-md-7">
                 <input
@@ -128,21 +96,22 @@ class CustomerProfile extends Component {
                 <input
                   required
                   className="form-control"
-                  type="text"
+                  type="tel"
                   placeholder="Phone (xxx)-xxx xxxx"
                 />
               </div>
             </div>
+            <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
                 <button type="button" className="btn btn-primary">
-                  Update Profile
+                  Submit
                 </button>
               </div>
             </div>
             <br />
             <div className={styles.button}>
-              <Link to="/CustomerDash">
+              <Link to="/ComDash">
                 <button type="button" className="btn btn-danger">
                   Cancel
                 </button>
@@ -151,7 +120,7 @@ class CustomerProfile extends Component {
           </form>
         </div>
       </div>
-    );
-  }
-}
-export default CustomerProfile;
+    </div>
+  );
+};
+export default Comtemp2;

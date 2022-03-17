@@ -63,7 +63,7 @@ class Walkthrough extends Component {
               <div className={styles.form_group}>
                 <label className="control-label col-md-2">Coampany Type</label>
                 <div className="col-md-1">
-                  <select required className={styles.form_control}>
+                  <select required className="form-control">
                     <option>Common Company</option>
                     <option>Medical</option>
                   </select>
@@ -73,7 +73,7 @@ class Walkthrough extends Component {
                   Public or Private
                 </label>
                 <div className="col-md-1">
-                  <select required className={styles.form_control}>
+                  <select required className="form-control">
                     <option>Private</option>
                     <option>Public</option>
                   </select>
@@ -82,7 +82,7 @@ class Walkthrough extends Component {
                 <div className="col-md-3">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     maxlenth="20"
                     minlenth="2"
                     placeholder="Company Sector"
@@ -92,7 +92,7 @@ class Walkthrough extends Component {
                 <div className="col-md-3">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     maxlenth="20"
                     minlenth="2"
                     placeholder="Last Name"
@@ -107,7 +107,7 @@ class Walkthrough extends Component {
                 <div className="col-md-2">
                   <input
                     required
-                    className={styles.form_control}
+                    className="form-control"
                     type="number"
                     placeholder=" years"
                     min={0}
@@ -115,7 +115,7 @@ class Walkthrough extends Component {
                 </div>
                 <br />
                 <div className="col-md-2">
-                  <input required className={styles.form_control} type="date" />
+                  <input required className="form-control" type="date" />
                 </div>
                 <br />
               </div>
@@ -128,6 +128,7 @@ class Walkthrough extends Component {
                   </Link>
                 </div>
               </div>
+              <br />
               <div className="buttonp">
                 <Link to="/companylogin">
                   <button type="button" className="btn btn-danger">

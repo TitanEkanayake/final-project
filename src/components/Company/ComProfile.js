@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./ComProfile.module.css";
+import { Link } from "react-router-dom";
 
 export default class ComProfile extends Component {
   constructor(props) {
@@ -151,9 +152,11 @@ export default class ComProfile extends Component {
               </div>
               <br />
               <div className={styles.button}>
-                <button type="button" className="btn btn-danger">
-                  Cancel
-                </button>
+                <Link to="/ComDash">
+                  <button type="button" className="btn btn-danger">
+                    Cancel
+                  </button>
+                </Link>
               </div>
             </form>
           </div>

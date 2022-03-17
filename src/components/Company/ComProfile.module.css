@@ -23,23 +23,26 @@
 }
 
 .form_horizontal {
-  background-color: rgb(216, 225, 231);
-  opacity: 0.95;
+  background-color: rgb(255, 255, 255);
   overflow: auto;
   min-width: 500px;
   min-height: 300px;
-  -webkit-box-shadow: 10px 10px 10px 10px #b0b0b0;
-  box-shadow: 10px 10px 10px 10px #b0b0b0;
-  outline: 4px solid #1c9fc7;
-  outline-offset: 0px;
+  -webkit-box-shadow: 10px 10px 10px 10px #080808;
+  box-shadow: 10px 10px 10px 10px #111111;
+  padding: 10px;
+  position: relative;
+  color: rgb(0, 0, 0);
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
+  opacity: 0.8;
+  outline: 4px solid #000000;
+  outline-offset: 0px;
 }
 
 div.col-md-3 {
   padding-top: 10px;
 }
-div.form_group {
+div.form-group {
   padding-top: 10px;
 }
 

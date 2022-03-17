@@ -8,7 +8,7 @@ export default class Navigationbar extends Component {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">
-            Reservation.LK <i className="fas fa-atlas"></i>
+            Reservation.LK <i className="fas fa-atlas" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -18,6 +18,9 @@ export default class Navigationbar extends Component {
               </LinkContainer>
               <LinkContainer to="/">
                 <Nav.Link> Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/selection">
+                <Nav.Link> Selection</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
