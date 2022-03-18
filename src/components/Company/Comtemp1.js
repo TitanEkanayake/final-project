@@ -26,7 +26,7 @@ export const Comtemp1 = () => {
       <div className={styles.containerz}>
         <div className={styles.form_c}>
           <form className={styles.form_horizontal}>
-            <h4 className="form-header">Fill The From</h4>
+            <h4 className="form-header">Service name</h4>
             <div className={styles.form_group}>
               <div className="col-md-3">
                 <input

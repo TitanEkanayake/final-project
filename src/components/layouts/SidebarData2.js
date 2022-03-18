@@ -18,14 +18,8 @@ export const SidebarData2 = [
   },
   {
     title: "Records",
-    path: "/Records",
+    path: "/ComRecords",
     icon: <AiIcons.AiFillBook />,
-    cName: "nav-text",
-  },
-  {
-    title: "Customer Reservations",
-    path: "/CustomerRes",
-    icon: <FaIcons.FaUserAlt />,
     cName: "nav-text",
   },
   {

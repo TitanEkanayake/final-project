@@ -7,15 +7,19 @@ const ComRecords = () => {
     { field: "id", headerName: "ID", width: 70 },
     { field: "firstName", headerName: "First name", width: 130 },
     { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "gender", headerName: "Gender", sortable: false, width: 130 },
     {
       field: "age",
       headerName: "Age",
       type: "number",
       width: 90,
+      sortable: false,
     },
+    { field: "address", headerName: "Address", sortable: false, width: 250 },
+    { field: "city", headerName: "City", sortable: false, width: 130 },
     {
-      field: "fullName",
-      headerName: "Full name",
+      field: "service",
+      headerName: "Service",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 160,
@@ -25,7 +29,15 @@ const ComRecords = () => {
   ];
 
   const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+    {
+      id: 1,
+      lastName: "Snow",
+      firstName: "Jon",
+      gender: "male",
+      city: "colombo",
+      address: "13/3",
+      age: 35,
+    },
     { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
     { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
     { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
@@ -36,15 +48,18 @@ const ComRecords = () => {
     { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
   return (
-    <div className={styles.container}>
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        />
+    <div className={styles.bg}>
+      <div className={styles.container}>
+        <div
+          style={{ height: 700, width: "100%", backgroundColor: "aliceblue" }}
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
       </div>
     </div>
   );

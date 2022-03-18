@@ -30,6 +30,7 @@
     "react-scoped-styles": "^0.5.5",
     "react-scripts": "5.0.0",
     "react-viewerjs": "^0.1.9",
+    "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

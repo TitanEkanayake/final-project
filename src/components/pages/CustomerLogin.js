@@ -3,6 +3,7 @@ import "./CustomerLogin.css";
 import { auth } from "../../Firebase_con";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import Popup from "./Popup";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,6 +11,12 @@ import {
 } from "firebase/auth";
 
 function CustomerLogin() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerUsername, setRegisterUsername] = useState("");
@@ -116,7 +123,28 @@ function CustomerLogin() {
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">
-                  <a href="#forgot">Forgot Password?</a>
+                  <input
+                    className="button"
+                    type="button"
+                    value="Forget password?"
+                    onClick={togglePopup}
+                  />
+                  {isOpen && (
+                    <Popup
+                      content={
+                        <>
+                          <b> E-mail</b>
+                          <div>
+                            <input id="user" type="emai" className="input1" />
+                          </div>
+                          <br />
+
+                          <button className="button">Submit</button>
+                        </>
+                      }
+                      handleClose={togglePopup}
+                    />
+                  )}
                 </div>
               </div>
               <div className="sign-up-htm">
