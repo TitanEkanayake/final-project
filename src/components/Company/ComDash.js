@@ -26,7 +26,7 @@ export const ComDash = () => {
             <Card.Text>{card.text2}</Card.Text>
             <div className={styles.Btncom1}>
               <Button
-                onClick={() => navigate(`/ComAddform/${card.id}`)}
+                onClick={() => navigate(`/ComResSelec/${card.id}`)}
                 variant="primary"
               >
                 Add....

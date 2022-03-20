@@ -22,16 +22,19 @@ function CustomerLogin() {
   const [registerUsername, setRegisterUsername] = useState("");
   const [loginEmail, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [initialTab, setInitialTab] = useState(true);
 
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const cred = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
-        registerPassword,
-        registerUsername
+        registerPassword
       );
-      console.log(user);
+      await cred.user.updateProfile({
+        displayName: registerUsername,
+      });
+      // console.log(user);
     } catch (error) {
       console.log(error.message);
     }
@@ -62,12 +65,20 @@ function CustomerLogin() {
               type="radio"
               name="tab"
               className="sign-in"
-              checked
+              checked={initialTab}
+              onChange={(e) => setInitialTab(e.target.checked)}
             />
             <label for="tab-1" className="tab">
               Sign In
             </label>
-            <input id="tab-2" type="radio" name="tab" className="sign-up" />
+            <input
+              id="tab-2"
+              type="radio"
+              name="tab"
+              className="sign-up"
+              checked={!initialTab}
+              onChange={(e) => setInitialTab(!e.target.checked)}
+            />
             <label for="tab-2" className="tab">
               Sign Up
             </label>

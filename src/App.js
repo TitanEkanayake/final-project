@@ -20,11 +20,11 @@ import Walkthrough from "./components/Company/Walkthrough";
 import Compside from "./components/layouts/Compside";
 import { ComDash } from "./components/Company/ComDash";
 import ComProfile from "./components/Company/ComProfile";
-import ComAddform from "./components/Company/ComAddform";
 import CustomerResFrom from "./components/pages/CustomerResFrom";
 import Comtemp1 from "./components/Company/Comtemp1";
 import Comtemp2 from "./components/Company/Comtemp2";
 import ComRecords from "./components/Company/ComRecords";
+import ComResSelec from "./components/Company/ComResSelec";
 
 const navEnabled = [
   "/",
@@ -35,19 +35,19 @@ const navEnabled = [
   "/Companylogin",
 ];
 const sideEnabled = [
-  "/customerdash",
-  "/Customerprofile",
-  "/CustomerRes",
-  "/CustomerInsdeRes",
-  "/CustomerResFrom",
+  "customerdash",
+  "Customerprofile",
+  "CustomerRes",
+  "CustomerInsdeRes",
+  "CustomerResFrom",
 ];
 const sideEnabled2 = [
-  "/ComDash",
-  "/ComProfile",
-  "/ComAddform",
-  "/Comtemp1",
-  "/Comtemp2",
-  "/ComRecords",
+  "ComDash",
+  "ComProfile",
+  "Comtemp1",
+  "Comtemp2",
+  "ComRecords",
+  "ComResSelec",
 ];
 
 const App = () => {
@@ -56,11 +56,13 @@ const App = () => {
     navEnabled.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
     -1;
   const enableside = () =>
-    sideEnabled.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
-    -1;
+    sideEnabled.findIndex(
+      (e) => e.toLowerCase() === pathname.split("/")[1].toLowerCase()
+    ) != -1;
   const enableside2 = () =>
-    sideEnabled2.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
-    -1;
+    sideEnabled2.findIndex(
+      (e) => e.toLowerCase() === pathname.split("/")[1].toLowerCase()
+    ) != -1;
   return (
     <div className="app">
       {enableNav() && <Navigationbar />}
@@ -80,11 +82,11 @@ const App = () => {
         <Route path="/walkthrough" element={<Walkthrough />} />
         <Route path="/ComDash" element={<ComDash />} />
         <Route path="/ComProfile" element={<ComProfile />} />
-        <Route path="/ComAddform" element={<ComAddform />} />
         <Route path="/CustomerResFrom" element={<CustomerResFrom />} />
         <Route path="/Comtemp1" element={<Comtemp1 />} />
         <Route path="/Comtemp2" element={<Comtemp2 />} />
         <Route path="/ComRecords" element={<ComRecords />} />
+        <Route path="/ComResSelec" element={<ComResSelec />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>
