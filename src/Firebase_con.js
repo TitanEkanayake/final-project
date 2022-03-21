@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "@firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { createContext, useState, useEffect, useContext } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWx7ZrCpYATg5E53hrvhW1PU9-T5Dep2g",

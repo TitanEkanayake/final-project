@@ -1,7 +1,6 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as BiIcons from "react-icons/bi";
 
 export const SidebarData = [
   {
@@ -20,12 +19,6 @@ export const SidebarData = [
     title: "Reservations",
     path: "/CustomerRes",
     icon: <AiIcons.AiFillBook />,
-    cName: "nav-text",
-  },
-  {
-    title: "Logout",
-    path: "/CustomerLogin",
-    icon: <BiIcons.BiLogOut />,
     cName: "nav-text",
   },
 ];

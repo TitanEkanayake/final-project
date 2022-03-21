@@ -1,53 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./CustomerLogin.css";
 import { auth } from "../../Firebase_con";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Popup from "./Popup";
 import {
+  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function CustomerLogin() {
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+
+    const { email, password } = e.target.elements;
+    const auth = getAuth();
+    try {
+      await signInWithEmailAndPassword(auth, email.value, password.value);
+    } catch (e) {
+      alert(e.message);
+    }
+  }, []);
+
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [Firstname, setFirstname] = useState("");
+  const [Lastname, setLastname] = useState("");
+  const [loginEmail, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
-
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerUsername, setRegisterUsername] = useState("");
-  const [loginEmail, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
   const [initialTab, setInitialTab] = useState(true);
+  let navigate = useNavigate();
 
   const register = async () => {
+    if (!registerEmail || !registerPassword || !Firstname || !Lastname) {
+      return alert("Values are empty!");
+    }
+
     try {
       const cred = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
-        registerPassword
+        registerPassword,
+        Firstname,
+        Lastname
       );
       await cred.user.updateProfile({
-        displayName: registerUsername,
+        displayName: Firstname,
       });
-      // console.log(user);
+
+      navigate("/Customerdash");
     } catch (error) {
+      alert(error);
       console.log(error.message);
     }
   };
   const login = async () => {
+    console.log(loginEmail, loginPassword);
     try {
       const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
-      console.log(user);
+      navigate("/Customerdash");
     } catch (error) {
+      alert(error);
       console.log(error.message);
     }
   };
@@ -83,7 +108,7 @@ function CustomerLogin() {
               Sign Up
             </label>
             <div className="login-form">
-              <div className="sign-in-htm">
+              <div className="sign-in-htm" onSubmit={handleSubmit}>
                 <div className="group">
                   <label for="user" className="label">
                     Email
@@ -123,14 +148,12 @@ function CustomerLogin() {
                   </Form>
                 </div>
                 <div className="group">
-                  <Link to="/CustomerDash">
-                    <input
-                      onClick={login}
-                      type="submit"
-                      className="button"
-                      value="Sign In"
-                    />
-                  </Link>
+                  <input
+                    onClick={login}
+                    type="submit"
+                    className="button"
+                    value="Sign In"
+                  />
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">
@@ -161,11 +184,22 @@ function CustomerLogin() {
               <div className="sign-up-htm">
                 <div className="group">
                   <label for="user" className="label">
-                    Username
+                    First Name
                   </label>
                   <input
                     onChange={(event) => {
-                      setRegisterUsername(event.target.value);
+                      setFirstname(event.target.value);
+                    }}
+                    className="input"
+                  />
+                </div>
+                <div className="group">
+                  <label for="user" className="label">
+                    LastName
+                  </label>
+                  <input
+                    onChange={(event) => {
+                      setLastname(event.target.value);
                     }}
                     className="input"
                   />
