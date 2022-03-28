@@ -1,8 +1,19 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../../Firebase_con";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import styles from "./Customerprofile.module.css";
+
 import { Link } from "react-router-dom";
 
 class CustomerProfile extends Component {
+  //image
   constructor(props) {
     super(props);
     this.state = { file: "", imagePreviewUrl: "" };
@@ -23,6 +34,7 @@ class CustomerProfile extends Component {
 
     reader.readAsDataURL(file);
   }
+  //
   render() {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;

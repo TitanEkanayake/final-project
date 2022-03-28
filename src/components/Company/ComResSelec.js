@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import DateTimePicker from "react-datetime-picker";
 import styles from "./Walkthrough.module.css";
 import { Link } from "react-router-dom";
+import { db } from "../../Firebase_con";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
+// import TextField from "@mui/material/TextField";
+// import AdapterDateFns from "@mui/lab/AdapterDateFns";
+// import LocalizationProvider from "@mui/lab/LocalizationProvider";
+// import DateTimePicker from "@mui/lab/DateTimePicker";
+// import Stack from "@mui/material/Stack";
 
 const ComResSelec = () => {
+  const [newName, setNewName] = useState("");
+  const [newDes, setNewDes] = useState("");
+  const userCollectionRef = collection(db, "ComDash");
+
+  const createUser = async () => {
+    await addDoc(userCollectionRef, { Name: newName, Description: newDes });
+  };
+
+  // const [value, setValue] = React.useState(new Date());
+  const [value, onChange] = useState(new Date());
+
   return (
     <div className={styles.bg0}>
       <meta charSet="utf-8" />
@@ -24,6 +51,9 @@ const ComResSelec = () => {
             <div className={styles.form_group}>
               <div className="col-md-3">
                 <input
+                  onChange={(event) => {
+                    setNewName(event.target.value);
+                  }}
                   required
                   className="form-control"
                   maxlenth="20"
@@ -39,13 +69,35 @@ const ComResSelec = () => {
                   <option>medical</option>
                 </select>
               </div>
+              {/* <br />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={3}>
+                  <DateTimePicker
+                    renderInput={(params) => <TextField {...params} />}
+                    label="Select a date"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    minDate={new Date("2020-02-14")}
+                    minTime={new Date(0, 0, 0, 8)}
+                    maxTime={new Date(0, 0, 0, 18, 45)}
+                  />
+                </Stack>
+              </LocalizationProvider> */}
+              <br />
+              <DateTimePicker onChange={onChange} value={value} />
+              <br />
+              <DateTimePicker onChange={onChange} value={value} />
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Discription</label>
               <div className="col-md-7">
                 <textarea
+                  onChange={(event) => {
+                    setNewDes(event.target.value);
+                  }}
                   className="form-control"
-                  placeholder="Additional comments"
                   rows={5}
                   defaultValue={"          "}
                 />
@@ -54,7 +106,11 @@ const ComResSelec = () => {
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button type="button" className="btn btn-primary">
+                <button
+                  onClick={createUser}
+                  type="button"
+                  className="btn btn-primary"
+                >
                   Submit
                 </button>
               </div>

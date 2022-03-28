@@ -20,7 +20,7 @@ class Selection extends Component {
                     <span>Customer</span>
                   </h2>
                   <p>So you can imagine your fears with less distraction.</p>
-                  <Link to="/CustomerLogin"></Link>
+                  <Link to="/CustomerLogin" />
                 </figcaption>
               </figure>
             </Col>
@@ -38,7 +38,7 @@ class Selection extends Component {
                     At things that don't make sense, we couldn't react to a lot
                     of life.
                   </p>
-                  <Link to="/CompanyLogin"></Link>
+                  <Link to="/CompanyLogin" />
                 </figcaption>
               </figure>
             </Col>
