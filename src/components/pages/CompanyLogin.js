@@ -3,6 +3,18 @@ import { Form } from "react-bootstrap";
 import "./CompanyLogin.css";
 import { Link } from "react-router-dom";
 
+// exports.setAdminClaims = functions.https.onCall(async (data, context) => {
+
+//   // If necessary check the uid of the caller, via the context object
+
+//   const adminUIDs = ['2jfow4fd3H2ZqYLWZI2s1YdqOPB42', '767fjdhshd3H2ZqYLWZI2suyyqOPB42'];
+
+//   await Promise.all(adminUIDs.map(uid => admin.auth().setCustomUserClaims(uid, { admin: true })));
+
+//   return { result: "Operation completed" }
+
+// })
+
 class CompanyLogin extends Component {
   render() {
     return (
