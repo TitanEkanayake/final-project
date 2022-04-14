@@ -26,32 +26,31 @@ export const ComDash = () => {
   let navigate = useNavigate();
   const cardInfo = [
     {
-      image:
+      image1:
         "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      title: "Add your Servise",
-      text: "bla bla",
+      //     id: 1,
+      //     title: "Add your Servise",
+      //     text: "",
     },
   ];
-  const dafalutCard = (card) => {
-    return (
-      <>
-        <Card
-          className="text-center"
-          style={{ width: "18rem", margin: "10px" }}
-        >
-          <Card.Img variant="top" src={card.image} />
-          <Card.Body>
-            <Card.Title>{card.title}</Card.Title>
-            <Card.Text>{card.text}</Card.Text>
-            <Button variant="primary">Add Your Service</Button>
-          </Card.Body>
-        </Card>
-      </>
-    );
-  };
   const renderCard = (card) => {
     return (
       <>
+        <Card style={{ width: "18rem", height: "18rem", margin: "10px" }}>
+          <Card.Img variant="top" src={card.image1} />
+          <Card.Body>
+            <Card.Title>{"Add your Service"}</Card.Title>
+            <div className={styles.Btncom1}>
+              <Button
+                onClick={() => navigate(`/ComResSelec`)}
+                variant="primary"
+              >
+                Add....
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+
         <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
@@ -82,10 +81,7 @@ export const ComDash = () => {
     <div className="hero-containery">
       <div className="cards">
         {loading && <div>Loading...</div>}
-        <Row>
-          {cardInfo.map(dafalutCard)}
-          {filtered && filtered.length > 0 && filtered.map(renderCard)}
-        </Row>
+        <Row>{filtered && filtered.length > 0 && filtered.map(renderCard)}</Row>
       </div>
     </div>
   );
