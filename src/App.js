@@ -91,6 +91,9 @@ const App = () => {
           <Route path="/Comtemp2" element={<Comtemp2 />} />
           <Route path="/ComRecords" element={<ComRecords />} />
           <Route path="/ComResSelec" element={<ComResSelec />} />
+          <Route path="/Selection" element={<Selection />} />
+          <Route path="/Customerlogin" element={<CustomerLogin />} />
+          <Route path="/Companylogin" element={<CompanyLogin />} />
         </Routes>
         {enableNav() && <Footer />}
       </div>

@@ -17,7 +17,7 @@ function Dashnav() {
 
   const logout = async () => {
     await signOut(auth);
-    navigate("/");
+    navigate("/Companylogin");
   };
   return (
     <>

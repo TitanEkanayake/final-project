@@ -70,3 +70,11 @@
 span {
   margin-left: 16px;
 }
+
+.nav-text{
+  color: #f5f5f5;
+  font-size: large;
+  cursor: pointer;
+  
+  
+}
