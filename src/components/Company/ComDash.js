@@ -3,7 +3,8 @@ import styles from "./ComDash.module.css";
 import { db } from "../../Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { Helmet } from "react-helmet";
 
 export const ComDash = () => {
   const userCollectionRef = collection(db, "ComDash");
@@ -36,21 +37,6 @@ export const ComDash = () => {
   const renderCard = (card) => {
     return (
       <>
-        <Card style={{ width: "18rem", height: "18rem", margin: "10px" }}>
-          <Card.Img variant="top" src={card.image1} />
-          <Card.Body>
-            <Card.Title>{"Add your Service"}</Card.Title>
-            <div className={styles.Btncom1}>
-              <Button
-                onClick={() => navigate(`/ComResSelec`)}
-                variant="primary"
-              >
-                Add....
-              </Button>
-            </div>
-          </Card.Body>
-        </Card>
-
         <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
@@ -79,10 +65,35 @@ export const ComDash = () => {
   };
   return (
     <div className="hero-containery">
+      <Helmet>
+        <style>{"body { background-color: red; }"}</style>
+      </Helmet>
       <div className="cards">
         {loading && <div>Loading...</div>}
-        <Row>{filtered && filtered.length > 0 && filtered.map(renderCard)}</Row>
+        <Row>
+          <Card style={{ width: "18rem", height: "18rem", margin: "10px" }}>
+            <Card.Img
+              variant="top"
+              src={
+                "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              }
+            />
+            <Card.Body>
+              <Card.Title>{"Add your Service"}</Card.Title>
+              <div className={styles.Btncom1}>
+                <Button
+                  onClick={() => navigate(`/ComResSelec`)}
+                  variant="primary"
+                >
+                  Add....
+                </Button>
+              </div>
+            </Card.Body>
+          </Card>
+          {filtered && filtered.length > 0 && filtered.map(renderCard)}
+        </Row>
       </div>
     </div>
   );
 };
+export default ComDash;

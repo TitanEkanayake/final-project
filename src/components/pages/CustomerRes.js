@@ -1,6 +1,7 @@
 import React from "react";
 import "./CustomerRes.css";
 import { Row, Card, Button } from "react-bootstrap";
+import { Helmet } from "react-helmet";
 
 const CustomerRes = () => {
   const cardInfo = [
@@ -37,6 +38,9 @@ const CustomerRes = () => {
   };
   return (
     <div className="hero-containery">
+      <Helmet>
+        <style>{"body { background-color: red; }"}</style>
+      </Helmet>
       <div className="cards">
         <Row>{cardInfo.map(renderCard)}</Row>
       </div>

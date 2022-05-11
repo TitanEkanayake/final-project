@@ -27,14 +27,14 @@
   overflow: auto;
   min-width: 500px;
   min-height: 300px;
-  -webkit-box-shadow: 10px 10px 10px 10px #080808;
-  box-shadow: 10px 10px 10px 10px #111111;
+  /* -webkit-box-shadow: 10px 10px 10px 10px #080808;
+  box-shadow: 10px 10px 10px 10px #111111; */
   padding: 10px;
   position: relative;
   color: rgb(0, 0, 0);
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  opacity: 0.8;
+  opacity: 2;
   outline: 4px solid #000000;
   outline-offset: 0px;
 }
@@ -86,4 +86,35 @@ div.previewText {
     font-size: 50px;
     padding-top: 30px;
   }
+}
+
+.previewComponent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.preview {
+  margin-bottom: 10px;
+  display:flex;
+  flex-direction: column;
+}
+
+.image {
+  max-width: 100px;
+  max-height: 320px;
+  margin: 5px;
+}
+
+.delete {
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  background-color: red;
+  margin-left: 5px;
+  color: aliceblue;
+  border: none;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
 }

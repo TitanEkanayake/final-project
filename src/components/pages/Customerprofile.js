@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 const CustomerProfile = () => {
   const [selectedImage, setSelectedImage] = useState();
 
+  //  preview not need
+  // useEffect(() => {
+  //   if (currentUser ?.selectedImage) {
+  //     setSelectedImage(currentUser.selectedImage);
+  //   }
+  // }, [currentUser]);
+
   // This function will be triggered when the file field change
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -40,7 +47,7 @@ const CustomerProfile = () => {
                 <img
                   src={URL.createObjectURL(selectedImage)}
                   className={styles.image}
-                  alt="Thumb"
+                  alt="Avatar"
                 />
                 <button onClick={removeSelectedImage} className={styles.delete}>
                   Remove

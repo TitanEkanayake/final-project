@@ -1,3 +1,6 @@
+body, html {
+  height: 100%;
+}
 .card {
   left: 300px;
   top: 100px;
@@ -6,8 +9,8 @@
   margin-top: 10px;
 }
 div.hero-containery {
-  background-color: rgb(204, 204, 204);
-  height: 100vh;
+  background-color: rgb(71, 21, 21);
+  height: 100%;
 }
 
 div.cards {

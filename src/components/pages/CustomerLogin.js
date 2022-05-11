@@ -3,7 +3,7 @@ import "./CustomerLogin.css";
 import { auth } from "../../Firebase_con";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import Popup from "./Popup";
+import Modal from "./Popup";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -33,9 +33,8 @@ function CustomerLogin() {
   const [loginPassword, setLoginPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [initialTab, setInitialTab] = useState(true);
   let navigate = useNavigate();
 
@@ -93,7 +92,7 @@ function CustomerLogin() {
               checked={initialTab}
               onChange={(e) => setInitialTab(e.target.checked)}
             />
-            <label for="tab-1" className="tab">
+            <label htmlFor="tab-1" className="tab">
               Sign In
             </label>
             <input
@@ -104,13 +103,13 @@ function CustomerLogin() {
               checked={!initialTab}
               onChange={(e) => setInitialTab(!e.target.checked)}
             />
-            <label for="tab-2" className="tab">
+            <label htmlFor="tab-2" className="tab">
               Sign Up
             </label>
             <div className="login-form">
               <div className="sign-in-htm" onSubmit={handleSubmit}>
                 <div className="group">
-                  <label for="user" className="label">
+                  <label htmlFor="user" className="label">
                     Email
                   </label>
                   <input
@@ -124,7 +123,7 @@ function CustomerLogin() {
                   />
                 </div>
                 <div className="group">
-                  <label for="pass" className="label">
+                  <label htmlFor="pass" className="label">
                     Password
                   </label>
                   <input
@@ -161,29 +160,16 @@ function CustomerLogin() {
                     className="button"
                     type="button"
                     value="Forget password?"
-                    onClick={togglePopup}
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
                   />
-                  {isOpen && (
-                    <Popup
-                      content={
-                        <>
-                          <b> E-mail</b>
-                          <div>
-                            <input id="user" type="emai" className="input1" />
-                          </div>
-                          <br />
-
-                          <button className="button">Submit</button>
-                        </>
-                      }
-                      handleClose={togglePopup}
-                    />
-                  )}
+                  {modalOpen && <Modal setOpenModal={setModalOpen} />}
                 </div>
               </div>
               <div className="sign-up-htm">
                 <div className="group">
-                  <label for="user" className="label">
+                  <label htmlFor="user" className="label">
                     First Name
                   </label>
                   <input
@@ -194,7 +180,7 @@ function CustomerLogin() {
                   />
                 </div>
                 <div className="group">
-                  <label for="user" className="label">
+                  <label htmlFor="user" className="label">
                     LastName
                   </label>
                   <input
@@ -205,7 +191,7 @@ function CustomerLogin() {
                   />
                 </div>
                 <div className="group">
-                  <label for="pass" className="label">
+                  <label htmlFor="pass" className="label">
                     Email Address
                   </label>
                   <input
@@ -218,7 +204,7 @@ function CustomerLogin() {
                   />
                 </div>
                 <div className="group">
-                  <label for="pass" className="label">
+                  <label htmlFor="pass" className="label">
                     Password
                   </label>
                   <input
@@ -234,7 +220,7 @@ function CustomerLogin() {
                   />
                 </div>
                 <div className="group">
-                  <label for="pass" className="label">
+                  <label htmlFor="pass" className="label">
                     Repeat Password
                   </label>
                   <input
@@ -256,7 +242,7 @@ function CustomerLogin() {
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">
-                  <label for="tab-1">Already Member?</label>
+                  <label htmlFor="tab-1">Already Member?</label>
                 </div>
               </div>
             </div>

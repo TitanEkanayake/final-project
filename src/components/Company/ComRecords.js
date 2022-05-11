@@ -1,66 +1,76 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
+import { db } from "../../Firebase_con";
 import { DataGrid } from "@mui/x-data-grid";
 import styles from "./ComRecords.module.css";
+import Table from "react-bootstrap/Table";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 const ComRecords = () => {
-  const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    { field: "gender", headerName: "Gender", sortable: false, width: 130 },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-      sortable: false,
-    },
-    { field: "address", headerName: "Address", sortable: false, width: 250 },
-    { field: "city", headerName: "City", sortable: false, width: 130 },
-    {
-      field: "service",
-      headerName: "Service",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
+  const userCollectionRef = collection(db, "ComRecords");
+  const [loading, setLoading] = useState(true);
+  const [filtered, setfiltered] = useState([]);
 
-  const rows = [
-    {
-      id: 1,
-      lastName: "Snow",
-      firstName: "Jon",
-      gender: "male",
-      city: "colombo",
-      address: "13/3",
-      age: 35,
-    },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
+  const getUsers = async () => {
+    setLoading(true);
+    const data = await getDocs(userCollectionRef);
+    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+    setfiltered(dt);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  // const tableInfo = [
+  //   {
+  //     id: "sdsd",
+  //     Fname: "sdsd",
+  //     Lname: "sdsds",
+  //     UName: "sasddsds",
+  //   },
+  //   {
+  //     id: "123",
+  //     Fname: "Titan",
+  //     Lname: "mano",
+  //     UName: "eka",
+  //   },
+  // ];
+  const renderTable = (table) => {
+    return (
+      <>
+        <tr>
+          <td>{table.Id}</td>
+          <td>{table.fname}</td>
+          <td>{table.lname}</td>
+          <td>{table.age}</td>
+          <td>{table.gender}</td>
+          <td>{table.address}</td>
+          <td>{table.service}</td>
+        </tr>
+      </>
+    );
+  };
   return (
-    <div className={styles.bg}>
-      <div className={styles.container}>
-        <div
-          style={{ height: 700, width: "100%", backgroundColor: "aliceblue" }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
-      </div>
+    <div className={styles.table}>
+      <Table striped bordered hover>
+        {" "}
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Service</th>
+          </tr>
+        </thead>{" "}
+        <tbody>
+          {filtered && filtered.length > 0 && filtered.map(renderTable)}
+        </tbody>
+      </Table>
     </div>
   );
 };

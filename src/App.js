@@ -101,12 +101,16 @@ const App = () => {
   return (
     <div className="app">
       {enableNav() && <Navigationbar />}
+      {enableside() && <Dashnav />}
+      {enableside2() && <Compside />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Selection" element={<Selection />} />
         <Route path="/Customerlogin" element={<CustomerLogin />} />
         <Route path="/Companylogin" element={<CompanyLogin />} />
         <Route path="/ComDash" element={<ComDash />} />
+        <Route path="/ComProfile" element={<ComProfile />} />
+        <Route path="/ComRecords" element={<ComRecords />} />
         <Route path="/ComResSelec" element={<ComResSelec />} />
       </Routes>
       {enableNav() && <Footer />}
