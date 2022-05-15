@@ -1,14 +1,35 @@
 import React, { useState } from "react";
 import styles from "./Comtemp1.module.css";
-import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Stack from "@mui/material/Stack";
+import { db } from "../../firebase/Firebase_con";
+import { collection, addDoc } from "firebase/firestore";
+import Modal from "../../SuccessfulPopup";
 
 export const Comtemp1 = () => {
+  const [modalOpentemp1, setModalOpentemp1] = useState(false);
   const [value, setValue] = React.useState(new Date());
+  const [newFName, setNewFName] = useState("");
+  const [newLName, setNewLName] = useState("");
+  const [newDate, setNewDate] = useState("");
+  const [newAddress, setNewAddress] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+  const usersCollectionRef = collection(db, "ComRecords");
+
+  const create = async () => {
+    await addDoc(usersCollectionRef, {
+      fname: newFName,
+      lname: newLName,
+      date: newDate,
+      address: newAddress,
+      email: newEmail,
+      number: newNumber,
+    });
+  };
   return (
     <div className={styles.bg0}>
       <meta charSet="utf-8" />
@@ -17,7 +38,6 @@ export const Comtemp1 = () => {
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       />
-
       <link rel="stylesheet" href="style.css" />
       <link
         href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
@@ -26,8 +46,9 @@ export const Comtemp1 = () => {
       <div className={styles.containerz}>
         <div className={styles.form_c}>
           <form className={styles.form_horizontal}>
-            <h4 className="form-header">Service name</h4>
+            <h4 className={styles.form_header}>Fill The From</h4>
             <div className={styles.form_group}>
+              <label className="control-label col-md-2">Name</label>
               <div className="col-md-3">
                 <input
                   required
@@ -35,6 +56,9 @@ export const Comtemp1 = () => {
                   maxlenth="20"
                   minlenth="2"
                   placeholder="First Name"
+                  onChange={(event) => {
+                    setNewFName(event.target.value);
+                  }}
                 />
               </div>
               <br />
@@ -45,56 +69,50 @@ export const Comtemp1 = () => {
                   maxlenth="20"
                   minlenth="2"
                   placeholder="Last Name"
+                  onChange={(event) => {
+                    setNewLName(event.target.value);
+                  }}
                 />
               </div>
-              <br />
-              <label className="control-label col-md-2">Gender</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              </div>
             </div>
+            <br />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack
+                spacing={3}
+                onChange={(event) => {
+                  setNewDate(event.target.value);
+                }}
+              >
+                <DateTimePicker
+                  renderInput={(params) => <TextField {...params} />}
+                  label="Select a date"
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  minDate={new Date("2022-02-14")}
+                  minTime={new Date(0, 0, 0, 8)}
+                  maxTime={new Date(0, 0, 0, 18, 45)}
+                />
+              </Stack>
+            </LocalizationProvider>
+            <br />
             <div className={styles.form_group}>
-              <label className="control-label col-md-2">Date of birth</label>
-              <br />
-              <div className="col-md-2">
-                <input required className="form-control" type="date" />
-              </div>
-              <br />
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Stack spacing={3}>
-                  <DateTimePicker
-                    renderInput={(params) => <TextField {...params} />}
-                    label="Select a date"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    minDate={new Date("2020-02-14")}
-                    minTime={new Date(0, 0, 0, 8)}
-                    maxTime={new Date(0, 0, 0, 18, 45)}
-                  />
-                </Stack>
-              </LocalizationProvider>
-              <br />
-              <label className="control-label col-md-2">Hospital Branch</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>Colombo</option>
-                  <option>Kandy</option>
-                </select>
-              </div>
-              <br />
-              <label className="control-label col-md-2">Doctor</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>Jayasooriya</option>
-                  <option>Fernando</option>
-                </select>
+              <label className="control-label col-md-2">Address</label>
+              <div className="col-md-7">
+                <input
+                  required
+                  className="form-control"
+                  placeholder="Address"
+                  type="text"
+                  onChange={(event) => {
+                    setNewAddress(event.target.value);
+                  }}
+                />
               </div>
             </div>
+
+            <br />
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Contact</label>
               <div className="col-md-7">
@@ -103,38 +121,54 @@ export const Comtemp1 = () => {
                   className="form-control"
                   placeholder="E-mail"
                   type="email"
+                  onChange={(event) => {
+                    setNewEmail(event.target.value);
+                  }}
                 />
               </div>
             </div>
+
+            <br />
             <div className={styles.form_group}>
               <div className="col-md-7 col-md-offset-2">
                 <input
                   required
                   className="form-control"
-                  type="tel"
                   placeholder="Phone (xxx)-xxx xxxx"
+                  onChange={(event) => {
+                    setNewNumber(event.target.value);
+                  }}
                 />
               </div>
             </div>
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button type="button" className="btn btn-primary">
+                <button
+                  className="btn btn-primary"
+                  // disabled={
+                  //   (!newFName, !newLName, !newAddress, !newEmail, !newNumber)
+                  // }
+                  onClick={() => {
+                    // create();
+                    setModalOpentemp1(true);
+                  }}
+                >
                   Submit
                 </button>
               </div>
             </div>
+
             <br />
             <div className={styles.button}>
-              <Link to="/ComDash">
-                <button type="button" className="btn btn-danger">
-                  Cancel
-                </button>
-              </Link>
+              <button type="button" className="btn btn-danger">
+                Cancel
+              </button>
             </div>
           </form>
         </div>
       </div>
+      {modalOpentemp1 && <Modal setOpenModaltemp1={setModalOpentemp1} />}
     </div>
   );
 };

@@ -2,9 +2,8 @@
   background-image: url("https://images.unsplash.com/photo-1565688103955-d38e06888776?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80");
   object-fit: cover;
   overflow: auto;
-  min-width: 500px;
-  min-height: 300px;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   transform: "translate(-50%,-50%)";
   background-position: center;
@@ -111,7 +110,7 @@ div.previewText {
   cursor: pointer;
   width: 100px;
   height: 30px;
-  background-color: red;
+  background-color: rgb(163, 45, 45);
   margin-left: 5px;
   color: aliceblue;
   border: none;

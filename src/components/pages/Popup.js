@@ -16,10 +16,10 @@ function Popup({ setOpenModal }) {
             </button>
           </div>
           <div className="title">
-            <h1>Are You Sure You Want to Continue?</h1>
+            <h4>Enter your e-mail</h4>
           </div>
           <div className="body">
-            <p>The next page looks amazing. Hope you want to go there!</p>
+            <input id="user" type="emai" className="input1" />
           </div>
           <div className="footer">
             <button
@@ -30,7 +30,7 @@ function Popup({ setOpenModal }) {
             >
               Cancel
             </button>
-            <button>Continue</button>
+            <button className="btmcontinue">Continue</button>
           </div>
         </div>
       </div>

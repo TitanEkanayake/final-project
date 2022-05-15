@@ -40,7 +40,7 @@ const CustomerProfile = () => {
 
       <div className={styles.form_c}>
         <form className={styles.form_horizontal}>
-          <h4 className={styles.form_header}>Fill The From</h4>
+          <h4 className={styles.form_header}>Profile</h4>
           <div className={styles.previewComponent}>
             {selectedImage && (
               <div className={styles.preview}>

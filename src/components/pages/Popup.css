@@ -11,7 +11,7 @@
 
 .modalContainer {
   width: 500px;
-  height: 500px;
+  height: 350px;
   border-radius: 12px;
   background-color: rgb(240, 235, 235);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -59,7 +59,7 @@
   height: 45px;
   margin: 10px;
   border: none;
-  background-color: cornflowerblue;
+  background-color: rgb(34, 90, 194);
   color: white;
   border-radius: 8px;
   font-size: 20px;

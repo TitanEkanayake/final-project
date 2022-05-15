@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Walkthrough.module.css";
 import { Link } from "react-router-dom";
-
+import { db } from "../../firebase/Firebase_con";
+import { collection, addDoc } from "firebase/firestore";
 const ComResSelec = () => {
+  const [newName, setNewName] = useState("");
+  const [newDis, setNewDis] = useState("");
+  const usersCollectionRef = collection(db, "ComDash");
+
+  const create = async () => {
+    await addDoc(usersCollectionRef, { Name: newName, Description: newDis });
+  };
+
   return (
     <div className={styles.bg0}>
       <meta charSet="utf-8" />
@@ -29,34 +38,40 @@ const ComResSelec = () => {
                   maxlenth="20"
                   minlenth="2"
                   placeholder=" Name"
+                  onChange={(event) => {
+                    setNewName(event.target.value);
+                  }}
                 />
               </div>
               <br />
-              <label className="control-label col-md-2">Form type</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>normal</option>
-                  <option>medical</option>
-                </select>
-              </div>
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Discription</label>
               <div className="col-md-7">
                 <textarea
                   className="form-control"
-                  placeholder="Additional comments"
+                  placeholder="Discription"
                   rows={5}
                   defaultValue={"          "}
+                  onChange={(event) => {
+                    setNewDis(event.target.value);
+                  }}
                 />
               </div>
             </div>
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button type="button" className="btn btn-primary">
-                  Submit
-                </button>
+                <Link to="/ComDash">
+                  <button
+                    disabled={!newName}
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={create}
+                  >
+                    Submit
+                  </button>
+                </Link>
               </div>
             </div>
             <br />

@@ -47,21 +47,7 @@ const Comtemp2 = () => {
                   placeholder="Last Name"
                 />
               </div>
-              <br />
-              <label className="control-label col-md-2">Gender</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              </div>
-            </div>
-            <div className={styles.form_group}>
-              <label className="control-label col-md-2">Date of birth</label>
-              <br />
-              <div className="col-md-2">
-                <input required className="form-control" type="date" />
-              </div>
+
               <br />
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={3}>

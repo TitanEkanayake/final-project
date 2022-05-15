@@ -23,12 +23,14 @@ div.cards {
 div.hero-container-welcome {
   background-image: url(../../assets/videos/img1.jpg);
   height: 35vh;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transform: "translate(-50%,-50%)";
 }
 
 div.hero-container-welcome > h1 {

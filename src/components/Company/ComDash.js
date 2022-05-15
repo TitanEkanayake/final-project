@@ -25,15 +25,7 @@ export const ComDash = () => {
   }, []);
 
   let navigate = useNavigate();
-  const cardInfo = [
-    {
-      image1:
-        "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      //     id: 1,
-      //     title: "Add your Servise",
-      //     text: "",
-    },
-  ];
+
   const renderCard = (card) => {
     return (
       <>
@@ -66,7 +58,7 @@ export const ComDash = () => {
   return (
     <div className="hero-containery">
       <Helmet>
-        <style>{"body { background-color: red; }"}</style>
+        <style>{"body { background-color: lightblue; }"}</style>
       </Helmet>
       <div className="cards">
         {loading && <div>Loading...</div>}
