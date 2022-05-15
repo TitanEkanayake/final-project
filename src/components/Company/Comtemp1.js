@@ -5,7 +5,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Stack from "@mui/material/Stack";
-import { db } from "../../firebase/Firebase_con";
+import { db } from "../../Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
 import Modal from "../../SuccessfulPopup";
 

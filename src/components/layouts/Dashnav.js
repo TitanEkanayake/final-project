@@ -6,7 +6,7 @@ import { SidebarData } from "./SidebarData";
 import "./Dashnav.css";
 import { IconContext } from "react-icons";
 import { auth } from "../../Firebase_con";
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import * as BiIcons from "react-icons/bi";
 
 function Dashnav() {
@@ -17,7 +17,7 @@ function Dashnav() {
 
   const logout = async () => {
     await signOut(auth);
-    navigate("/Companylogin");
+    navigate("/Customerlogin");
   };
   return (
     <>

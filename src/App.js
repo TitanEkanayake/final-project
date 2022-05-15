@@ -43,15 +43,10 @@ const sideEnabled = [
   "CustomerRes",
   "CustomerInsdeRes",
   "CustomerResFrom",
-];
-const sideEnabled2 = [
-  "ComDash",
-  "ComProfile",
   "Comtemp1",
   "Comtemp2",
-  "ComRecords",
-  "ComResSelec",
 ];
+const sideEnabled2 = ["ComDash", "ComProfile", "ComRecords", "ComResSelec"];
 
 const App = () => {
   const { pathname } = useLocation();

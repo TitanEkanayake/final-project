@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Walkthrough.module.css";
 import { Link } from "react-router-dom";
-import { db } from "../../firebase/Firebase_con";
+import { db } from "../../Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
 const ComResSelec = () => {
   const [newName, setNewName] = useState("");
