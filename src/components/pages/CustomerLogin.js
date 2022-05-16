@@ -1,83 +1,37 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./CustomerLogin.css";
-import { auth } from "../../Firebase_con";
-import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
-import Modal from "./Popup";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+  auth,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../../Firebase_con";
 import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Modal from "./Popup";
 
 function CustomerLogin() {
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-
-    const { email, password } = e.target.elements;
-    const auth = getAuth();
-    try {
-      await signInWithEmailAndPassword(auth, email.value, password.value);
-    } catch (e) {
-      alert(e.message);
-    }
-  }, []);
-
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [Firstname, setFirstname] = useState("");
-  const [Lastname, setLastname] = useState("");
-  const [loginEmail, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [email, setEmail] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newName, setNewName] = useState("");
+  const [user, loading] = useAuthState(auth);
   const [modalOpen, setModalOpen] = useState(false);
-
   const [initialTab, setInitialTab] = useState(true);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const register = async () => {
-    if (!registerEmail || !registerPassword || !Firstname || !Lastname) {
-      return alert("Values are empty!");
-    }
-
-    try {
-      const cred = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword,
-        Firstname,
-        Lastname
-      );
-      await cred.user.updateProfile({
-        displayName: Firstname,
-      });
-
-      navigate("/Customerdash");
-    } catch (error) {
-      alert(error);
-      console.log(error.message);
-    }
+  const register = () => {
+    if (!newName) alert("Please enter name");
+    registerWithEmailAndPassword(newName, newEmail, newPassword);
   };
-  const login = async () => {
-    console.log(loginEmail, loginPassword);
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      navigate("/Customerdash");
-    } catch (error) {
-      alert(error);
-      console.log(error.message);
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
     }
-  };
-  const logout = async () => {
-    await signOut(auth);
-  };
+    if (user) navigate("/customerdash");
+  }, [user, loading]);
 
   return (
     <div className="hero-container2">
@@ -107,17 +61,15 @@ function CustomerLogin() {
               Sign Up
             </label>
             <div className="login-form">
-              <div className="sign-in-htm" onSubmit={handleSubmit}>
+              <div className="sign-in-htm">
                 <div className="group">
                   <label htmlFor="user" className="label">
                     Email
                   </label>
                   <input
                     required
-                    onChange={(event) => {
-                      setLoginUsername(event.target.value);
-                    }}
-                    id="user"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="text"
                     className="input"
                   />
@@ -127,78 +79,66 @@ function CustomerLogin() {
                     Password
                   </label>
                   <input
-                    onChange={(event) => {
-                      setLoginPassword(event.target.value);
-                    }}
                     required
-                    id="pass"
                     type="password"
                     className="input"
                     data-type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="group">
-                  <Form>
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="Keep me Signed in"
-                    />
-                  </Form>
-                </div>
-                <div className="group">
                   <input
-                    onClick={login}
+                    onClick={() => logInWithEmailAndPassword(email, password)}
                     type="submit"
                     className="button"
                     value="Sign In"
                   />
                 </div>
+                <div className="group">
+                  <label htmlFor="pass" className="label">
+                    or
+                  </label>
+                  <input
+                    type="submit"
+                    className="button"
+                    value="Sign In with Google"
+                    onClick={signInWithGoogle}
+                  />
+                </div>
                 <div className="hr" />
                 <div className="foot-lnk">
-                  <input
-                    className="button"
+                  <button
+                    className="btn btn-primary"
                     type="button"
-                    value="Forget password?"
                     onClick={() => {
                       setModalOpen(true);
                     }}
-                  />
+                  >
+                    Forget Password?
+                  </button>
                   {modalOpen && <Modal setOpenModal={setModalOpen} />}
                 </div>
               </div>
               <div className="sign-up-htm">
                 <div className="group">
                   <label htmlFor="user" className="label">
-                    First Name
+                    Full Name
                   </label>
                   <input
-                    onChange={(event) => {
-                      setFirstname(event.target.value);
-                    }}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
                     className="input"
                   />
                 </div>
-                <div className="group">
-                  <label htmlFor="user" className="label">
-                    LastName
-                  </label>
-                  <input
-                    onChange={(event) => {
-                      setLastname(event.target.value);
-                    }}
-                    className="input"
-                  />
-                </div>
+                <div className="group" />
                 <div className="group">
                   <label htmlFor="pass" className="label">
                     Email Address
                   </label>
                   <input
-                    onChange={(event) => {
-                      setRegisterEmail(event.target.value);
-                    }}
-                    id="pass"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
                     type="text"
                     className="input"
                   />
@@ -208,37 +148,27 @@ function CustomerLogin() {
                     Password
                   </label>
                   <input
-                    onChange={(event) => {
-                      setRegisterPassword(event.target.value);
-                    }}
-                    maxlenth="20"
-                    minlenth="6"
-                    id="pass"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                     type="password"
                     className="input"
-                    data-type="password"
                   />
                 </div>
                 <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Repeat Password
-                  </label>
                   <input
-                    id="pass"
-                    type="password"
-                    className="input"
-                    data-type="password"
+                    onClick={register}
+                    type="submit"
+                    className="button"
+                    value="Sign Up"
                   />
                 </div>
-
                 <div className="group">
-                  <Link to="/CustomerLogin">
-                    <input
-                      onClick={register}
-                      type="submit"
-                      className="button"
-                    />
-                  </Link>
+                  <input
+                    onClick={signInWithGoogle}
+                    className="button"
+                    type="submit"
+                    value="Sign in with Google"
+                  />
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">

@@ -99,6 +99,8 @@ a {
   -webkit-text-security: circle;
 }
 .login-form .group .label {
+  text-align: center;
+  padding: 5px;
   color: rgb(255, 253, 253);
   font-size: 12px;
 }

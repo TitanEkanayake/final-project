@@ -3,11 +3,9 @@ import { db } from "../../Firebase_con";
 import "./CustomerRes.css";
 import { Row, Card, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 
 const CustomerRes = () => {
-  const [users, setusers] = useState([]);
   const userCollectionRef = collection(db, "CustomerReservations");
   const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
@@ -16,7 +14,6 @@ const CustomerRes = () => {
     setLoading(true);
     const data = await getDocs(userCollectionRef);
     const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setusers(dt);
     setfiltered(dt);
     setLoading(false);
   };
@@ -24,8 +21,6 @@ const CustomerRes = () => {
   useEffect(() => {
     getUsers();
   }, []);
-
-  let navigate = useNavigate();
 
   const renderCard = (card) => {
     return (
@@ -48,6 +43,7 @@ const CustomerRes = () => {
         <style>{"body { background-color: lightblue; }"}</style>
       </Helmet>
       <div className="cards">
+        {loading && <div>Loading...</div>}
         <Row>{filtered && filtered.length > 0 && filtered.map(renderCard)}</Row>
       </div>
     </div>

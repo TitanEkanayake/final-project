@@ -1,20 +1,42 @@
 import { React, useState } from "react";
 import styles from "./ComProfile.module.css";
 import { Link } from "react-router-dom";
+import { storage } from "../../Firebase_con";
 
 const ComProfile = () => {
-  const [selectedImage, setSelectedImage] = useState();
+  const [image, setImage] = useState(null);
 
   // This function will be triggered when the file field change
   const imageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
     }
   };
+  //imagedb
+  const imageUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "stage_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            //console.log(url);
+          });
+      }
+    );
+  };
+  console.log("image: ", image);
 
   // This function will be triggered when the "Remove This Image" button is clicked
-  const removeSelectedImage = () => {
-    setSelectedImage();
+  const removeimage = () => {
+    setImage();
   };
   return (
     <div className={styles.bg0}>
@@ -35,17 +57,14 @@ const ComProfile = () => {
             <h4 className={styles.form_header}>Fill The From</h4>
             <br />
             <div className={styles.previewComponent}>
-              {selectedImage && (
+              {image && (
                 <div className={styles.preview}>
                   <img
-                    src={URL.createObjectURL(selectedImage)}
+                    src={URL.createObjectURL(image)}
                     className={styles.image}
                     alt="Thumb"
                   />
-                  <button
-                    onClick={removeSelectedImage}
-                    className={styles.delete}
-                  >
+                  <button onClick={removeimage} className={styles.delete}>
                     Remove
                   </button>
                 </div>
@@ -129,7 +148,6 @@ const ComProfile = () => {
                 <input
                   required
                   className="form-control"
-                  type="number"
                   placeholder="Phone (xxx)-xxx xxxx"
                 />
               </div>
@@ -137,7 +155,11 @@ const ComProfile = () => {
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button type="button" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={imageUpload}
+                >
                   Update Profile
                 </button>
               </div>

@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { auth } from "./Firebase_con";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Aboutus from "./components/pages/Aboutus";

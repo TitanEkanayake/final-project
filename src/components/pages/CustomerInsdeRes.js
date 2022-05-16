@@ -3,7 +3,7 @@ import "./CustomerInsdeRes.css";
 import { db } from "../../Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const CustomerInsdeRes = () => {
   const userCollectionRef = collection(db, "ComDash");
@@ -14,7 +14,6 @@ const CustomerInsdeRes = () => {
     setLoading(true);
     const data = await getDocs(userCollectionRef);
     const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
     setfiltered(dt);
     setLoading(false);
   };

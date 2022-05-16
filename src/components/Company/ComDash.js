@@ -15,7 +15,6 @@ export const ComDash = () => {
     setLoading(true);
     const data = await getDocs(userCollectionRef);
     const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
     setfiltered(dt);
     setLoading(false);
   };

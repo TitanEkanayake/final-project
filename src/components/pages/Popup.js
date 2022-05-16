@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { auth, sendPasswordReset } from "../../Firebase_con";
 import "./Popup.css";
 
 function Popup({ setOpenModal }) {
+  const [email, setEmail] = useState("");
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loading) return;
+    if (user) navigate("/");
+  }, [user, loading]);
   return (
     <div>
       <div className="modalBackground">
@@ -19,7 +29,13 @@ function Popup({ setOpenModal }) {
             <h4>Enter your e-mail</h4>
           </div>
           <div className="body">
-            <input id="user" type="emai" className="input1" />
+            <input
+              id="user"
+              type="emai"
+              className="input1"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="footer">
             <button
@@ -30,7 +46,13 @@ function Popup({ setOpenModal }) {
             >
               Cancel
             </button>
-            <button className="btmcontinue">Continue</button>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={() => sendPasswordReset(email)}
+            >
+              Continue
+            </button>
           </div>
         </div>
       </div>
