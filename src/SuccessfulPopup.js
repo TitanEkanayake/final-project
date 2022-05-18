@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SuccessfulPopup.module.css";
-import "../src/components/pages/Popup.css";
+import "./components/pages/Popup.css";
 
 function SuccessfulPopup({ setOpenModaltemp1 }) {
   return (

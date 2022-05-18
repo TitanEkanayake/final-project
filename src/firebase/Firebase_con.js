@@ -15,8 +15,11 @@ import {
   collection,
   where,
   addDoc,
+  setDoc,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getStorage, ref } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWx7ZrCpYATg5E53hrvhW1PU9-T5Dep2g",
@@ -43,7 +46,7 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -67,17 +70,25 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (
+  name,
+  email,
+  password,
+  gender,
+  Address,
+  Dob,
+  number
+) => {
   if (!email || !password || !name) {
     return alert("Values are empty!");
   }
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
-      name,
       authProvider: "local",
+      name,
       email,
     });
   } catch (err) {
@@ -101,6 +112,38 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+//imageupload
+const uploadImage = (userId, file, progress) => {
+  return new Promise((resolve, reject) => {
+    // create file reference
+    const filePath = `users/${userId}/profile-image`;
+    const fileRef = storage.ref().child(filePath);
+
+    // upload task
+    const uploadTask = fileRef.put(file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => progress(snapshot),
+      (error) => reject(error),
+      () => {
+        resolve(uploadTask.snapshot.ref);
+      }
+    );
+  });
+};
+
+const getDownloadUrl = (userId) => {
+  const filePath = `users/${userId}/profile-image`;
+  return storage
+    .ref()
+    .child(filePath)
+    .getDownloadURL();
+};
+
+// updateUserDocument
+export const updateUserDocument = async (user) =>
+  updateDoc(doc(db, "users", user.uid), user);
 
 export {
   auth,
@@ -111,4 +154,6 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  uploadImage,
+  getDownloadUrl,
 };

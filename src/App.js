@@ -26,6 +26,7 @@ import Comtemp1 from "./components/Company/Comtemp1";
 import Comtemp2 from "./components/Company/Comtemp2";
 import ComRecords from "./components/Company/ComRecords";
 import ComResSelec from "./components/Company/ComResSelec";
+import { UserProvider } from "./firebase/UserProvider";
 
 const navEnabled = [
   "/",
