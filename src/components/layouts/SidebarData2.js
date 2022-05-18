@@ -22,10 +22,4 @@ export const SidebarData2 = [
     icon: <AiIcons.AiFillBook />,
     cName: "nav-text",
   },
-  {
-    title: "Logout",
-    path: "/CompanyLogin",
-    icon: <BiIcons.BiLogOut />,
-    cName: "nav-text",
-  },
 ];

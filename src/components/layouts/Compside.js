@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SidebarData2 } from "./SidebarData2";
 import "./Dashnav.css";
 import { IconContext } from "react-icons";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/Firebase_con";
+import * as BiIcons from "react-icons/bi";
 
 function Compside() {
   const [Sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!Sidebar);
+
+  let navigate = useNavigate();
+
+  const logout = async () => {
+    await signOut(auth);
+    navigate("/Companylogin");
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -35,6 +46,10 @@ function Compside() {
                 </li>
               );
             })}
+            <li className={"nav-text"} onClick={logout}>
+              <BiIcons.BiLogOut />
+              <span>{"Logout"}</span>
+            </li>
           </ul>
         </nav>
       </IconContext.Provider>

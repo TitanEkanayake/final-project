@@ -103,6 +103,7 @@ const CustomerProfile = () => {
               <label>
                 Email
                 <input
+                  disabled
                   {...register("email")}
                   required
                   className="form-control"

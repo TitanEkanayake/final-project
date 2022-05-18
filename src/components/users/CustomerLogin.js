@@ -27,10 +27,19 @@ function CustomerLogin() {
   };
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/customerdash");
+
+    const fetchClaims = async () => {
+      const { claims } = await user.getIdTokenResult();
+      if (claims?.admin) {
+        navigate("/comdash");
+      } else {
+        navigate("/customerdash");
+      }
+    };
+
+    if (user) fetchClaims();
   }, [user, loading]);
 
   return (
