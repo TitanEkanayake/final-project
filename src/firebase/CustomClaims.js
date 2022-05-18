@@ -1,12 +1,13 @@
-const admin = require("firebase-admin");
+var admin = require("firebase-admin");
 
-const serviceAccount = require("..finaldb-e07d3-firebase-adminsdk-iagwx-049136e04d.json");
+var serviceAccount = require("./finaldb-e07d3-firebase-adminsdk-iagwx-2cf32753fe.json");
 
-const uid = process.arv[2];
+var uid = process.argv[2];
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "finaldb-e07d3.firebaseapp.com",
+  databaseURL:
+    "https://finaldb-e07d3-default-rtdb.asia-southeast1.firebasedatabase.app",
 });
 
 admin

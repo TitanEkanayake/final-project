@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./CustomerInsdeRes.css";
-import { db } from "../../Firebase_con";
+import { db } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";

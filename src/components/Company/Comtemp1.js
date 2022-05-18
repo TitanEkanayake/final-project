@@ -5,7 +5,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import Stack from "@mui/material/Stack";
-import { db } from "../../Firebase_con";
+import { db } from "../../firebase/Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
 import Modal from "../../SuccessfulPopup";
 
@@ -22,7 +22,7 @@ export const Comtemp1 = () => {
 
   const create = async () => {
     await addDoc(usersCollectionRef, {
-      fname: newFName,
+      name: newFName,
       lname: newLName,
       date: newDate,
       address: newAddress,
@@ -77,12 +77,7 @@ export const Comtemp1 = () => {
             </div>
             <br />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Stack
-                spacing={3}
-                onChange={(event) => {
-                  setNewDate(event.target.value);
-                }}
-              >
+              <Stack spacing={3}>
                 <DateTimePicker
                   renderInput={(params) => <TextField {...params} />}
                   label="Select a date"
@@ -146,12 +141,12 @@ export const Comtemp1 = () => {
               <div className="col-md-6 col-md-offset-2">
                 <button
                   className="btn btn-primary"
-                  // disabled={
-                  //   (!newFName, !newLName, !newAddress, !newEmail, !newNumber)
-                  // }
+                  disabled={
+                    (!newFName, !newLName, !newAddress, !newEmail, !newNumber)
+                  }
                   onClick={() => {
-                    // create();
-                    setModalOpentemp1(true);
+                    create();
+                    // setModalOpentemp1(true);
                   }}
                 >
                   Submit

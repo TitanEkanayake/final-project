@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { db } from "../../Firebase_con";
-import { DataGrid } from "@mui/x-data-grid";
+import { db } from "../../firebase/Firebase_con";
 import styles from "./ComRecords.module.css";
 import Table from "react-bootstrap/Table";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const ComRecords = () => {
   const userCollectionRef = collection(db, "ComRecords");
@@ -41,12 +40,11 @@ const ComRecords = () => {
     return (
       <>
         <tr>
-          <td>{table.Id}</td>
-          <td>{table.fname}</td>
-          <td>{table.lname}</td>
-          <td>{table.age}</td>
-          <td>{table.gender}</td>
+          <td>{table.uid}</td>
+          <td>{table.name}</td>
+          <td>{table.email}</td>
           <td>{table.address}</td>
+          <td>{table.number}</td>
           <td>{table.service}</td>
         </tr>
       </>
@@ -59,11 +57,10 @@ const ComRecords = () => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Age</th>
-            <th>Gender</th>
+            <th>name</th>
+            <th>Email</th>
             <th>Address</th>
+            <th>Number</th>
             <th>Service</th>
           </tr>
         </thead>{" "}

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Walkthrough.module.css";
 import { Link } from "react-router-dom";
-import { db } from "../../Firebase_con";
+import { db } from "../../firebase/Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
 const ComResSelec = () => {
   const [newName, setNewName] = useState("");
   const [newDis, setNewDis] = useState("");
-  const usersCollectionRef = collection(db, "ComDash");
+  const usersCollectionRef = collection(db, "service");
 
   const create = async () => {
+    if (!newName) alert("Please enter name");
     await addDoc(usersCollectionRef, { Name: newName, Description: newDis });
   };
 
@@ -62,16 +63,13 @@ const ComResSelec = () => {
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <Link to="/ComDash">
-                  <button
-                    disabled={!newName}
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={create}
-                  >
-                    Submit
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={create}
+                >
+                  Submit
+                </button>
               </div>
             </div>
             <br />

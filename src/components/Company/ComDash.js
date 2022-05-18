@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./ComDash.module.css";
-import { db } from "../../Firebase_con";
+import { db } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
@@ -31,7 +31,7 @@ export const ComDash = () => {
         <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
-            <Card.Title>{card.Name}</Card.Title>
+            <Card.Title>{card.name}</Card.Title>
             <Card.Text>{card.Description}</Card.Text>
             <div className={styles.Btncom1}>
               <Button

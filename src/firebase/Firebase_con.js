@@ -34,6 +34,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
+//google account login
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
   try {
@@ -55,6 +56,8 @@ const signInWithGoogle = async () => {
   }
 };
 
+//login
+
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -64,22 +67,18 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (newName, newEmail, newPassword) => {
-  if (!newEmail || !newPassword || !newName) {
+const registerWithEmailAndPassword = async (name, email, password) => {
+  if (!email || !password || !name) {
     return alert("Values are empty!");
   }
   try {
-    const res = await createUserWithEmailAndPassword(
-      auth,
-      newEmail,
-      newPassword
-    );
+    const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
-      newName,
+      name,
       authProvider: "local",
-      newEmail,
+      email,
     });
   } catch (err) {
     console.error(err);
@@ -87,6 +86,7 @@ const registerWithEmailAndPassword = async (newName, newEmail, newPassword) => {
   }
 };
 
+//passoword reset
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -97,6 +97,7 @@ const sendPasswordReset = async (email) => {
   }
 };
 
+//logout
 const logout = () => {
   signOut(auth);
 };

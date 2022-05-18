@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "./Firebase_con";
+import { auth } from "./firebase/Firebase_con";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,19 +10,18 @@ import Navigationbar from "./components/layouts/Navigationbar";
 import Footer from "./components/layouts/Footer";
 import Contactus from "./components/pages/Contactus";
 import Selection from "./components/pages/Selection";
-import CustomerLogin from "./components/pages/CustomerLogin";
-import CompanyLogin from "./components/pages/CompanyLogin";
-import CustomerDash from "./components/pages/CustomerDash";
+import CustomerLogin from "./components/users/CustomerLogin";
+import CompanyLogin from "./components/Company/CompanyLogin";
+import CustomerDash from "./components/users/CustomerDash";
 import { useLocation } from "react-router-dom";
-import Customerprofile from "./components/pages/Customerprofile";
+import Customerprofile from "./components/users/Customerprofile";
 import Dashnav from "./components/layouts/Dashnav";
-import CustomerRes from "./components/pages/CustomerRes";
-import CustomerInsdeRes from "./components/pages/CustomerInsdeRes";
+import CustomerRes from "./components/users/CustomerRes";
+import CustomerInsdeRes from "./components/users/CustomerInsdeRes";
 import Walkthrough from "./components/Company/Walkthrough";
 import Compside from "./components/layouts/Compside";
 import { ComDash } from "./components/Company/ComDash";
 import ComProfile from "./components/Company/ComProfile";
-import CustomerResFrom from "./components/pages/CustomerResFrom";
 import Comtemp1 from "./components/Company/Comtemp1";
 import Comtemp2 from "./components/Company/Comtemp2";
 import ComRecords from "./components/Company/ComRecords";
@@ -80,7 +79,6 @@ const App = () => {
           <Route path="/walkthrough" element={<Walkthrough />} />
           <Route path="/ComDash" element={<ComDash />} />
           <Route path="/ComProfile" element={<ComProfile />} />
-          <Route path="/CustomerResFrom" element={<CustomerResFrom />} />
           <Route path="/Comtemp1" element={<Comtemp1 />} />
           <Route path="/Comtemp2" element={<Comtemp2 />} />
           <Route path="/ComRecords" element={<ComRecords />} />

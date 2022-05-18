@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../Firebase_con";
+import { db } from "../../firebase/Firebase_con";
 import "./CustomerRes.css";
 import { Row, Card, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet";

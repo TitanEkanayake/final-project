@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Dashnav.css";
 import { IconContext } from "react-icons";
-import { auth } from "../../Firebase_con";
+import { auth } from "../../firebase/Firebase_con";
 import { signOut } from "firebase/auth";
 import * as BiIcons from "react-icons/bi";
 

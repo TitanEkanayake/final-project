@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 // })
 
 function CompanyLogin() {
-  const [initialTab, setInitialTab] = useState(true);
   return (
     <div className="hero-containerx">
       <div>

@@ -5,10 +5,10 @@ import {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "../../Firebase_con";
+} from "../../firebase/Firebase_con";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import Modal from "./Popup";
+import Modal from "../pages/Popup";
 
 function CustomerLogin() {
   const [email, setEmail] = useState("");

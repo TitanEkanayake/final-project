@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, sendPasswordReset } from "../../Firebase_con";
+import { auth, sendPasswordReset } from "../../firebase/Firebase_con";
 import "./Popup.css";
 
 function Popup({ setOpenModal }) {

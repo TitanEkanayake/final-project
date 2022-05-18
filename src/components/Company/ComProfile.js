@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import styles from "./ComProfile.module.css";
 import { Link } from "react-router-dom";
-import { storage } from "../../Firebase_con";
+import { storage } from "../../firebase/Firebase_con";
 
 const ComProfile = () => {
   const [image, setImage] = useState(null);
