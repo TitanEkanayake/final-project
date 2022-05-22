@@ -105,7 +105,7 @@ const ComProfile = () => {
                   Company Description
                 </label>
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   rows="5"
                   {...register("description")}
                 />

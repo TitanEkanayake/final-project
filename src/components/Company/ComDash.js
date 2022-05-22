@@ -3,14 +3,7 @@ import styles from "./ComDash.module.css";
 import { db, auth } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import {
-  collection,
-  getDocs,
-  where,
-  deleteDoc,
-  doc,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { Helmet } from "react-helmet";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -61,7 +54,7 @@ export const ComDash = (main) => {
               </Button>
             </div>
             <div className={styles.Btncom2}>
-              <Button onClick={() => deleteDocument("")} variant="primary">
+              <Button onClick variant="primary">
                 Delete
               </Button>
             </div>

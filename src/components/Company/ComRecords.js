@@ -47,7 +47,6 @@ const ComRecords = () => {
   return (
     <div className={styles.table}>
       <Table striped bordered hover>
-        {" "}
         <thead>
           <tr>
             <th>Id</th>
@@ -57,7 +56,7 @@ const ComRecords = () => {
             <th>Number</th>
             <th>Service</th>
           </tr>
-        </thead>{" "}
+        </thead>
         <tbody>
           {filtered && filtered.length > 0 && filtered.map(renderTable)}
         </tbody>
