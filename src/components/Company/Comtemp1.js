@@ -1,35 +1,49 @@
 import React, { useState } from "react";
 import styles from "./Comtemp1.module.css";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 import { db } from "../../firebase/Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
-import Modal from "../../SuccessfulPopup";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase/Firebase_con";
+import { useNavigate, useParams } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import TimePicker from "react-time-picker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const Comtemp1 = () => {
-  const [modalOpentemp1, setModalOpentemp1] = useState(false);
-  const [value, setValue] = React.useState(new Date());
-  const [newFName, setNewFName] = useState("");
-  const [newLName, setNewLName] = useState("");
-  const [newDate, setNewDate] = useState("");
+  const [user] = useAuthState(auth);
+  const { id } = useParams();
+  const [newEmail, setNewEmail] = useState();
+  const [newNumber, setNewnumber] = useState();
+  const [newDate, setnewDate] = useState(new Date());
+  const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const usersCollectionRef = collection(db, "ComRecords");
+  const uid = user ? user.uid : null;
+  const usersCollectionRef = collection(db, "bookings");
+  const navigate = useNavigate();
+  newDate.toString();
 
   const create = async () => {
-    await addDoc(usersCollectionRef, {
-      name: newFName,
-      lname: newLName,
-      date: newDate,
-      address: newAddress,
-      email: newEmail,
-      number: newNumber,
-    });
+    if ((!newName, !newAddress)) alert("Please enter name!");
+    else {
+      try {
+        await addDoc(usersCollectionRef, {
+          name: newName,
+          address: newAddress,
+          uid,
+          email: newEmail,
+          number: newNumber,
+          compId: id,
+        });
+        alert("Service Added");
+        navigate("/Customerdash");
+      } catch (error) {
+        console.log(error);
+        alert("There was a Error");
+      }
+    }
   };
+
   return (
     <div className={styles.bg0}>
       <meta charSet="utf-8" />
@@ -38,6 +52,7 @@ export const Comtemp1 = () => {
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       />
+
       <link rel="stylesheet" href="style.css" />
       <link
         href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
@@ -46,92 +61,67 @@ export const Comtemp1 = () => {
       <div className={styles.containerz}>
         <div className={styles.form_c}>
           <form className={styles.form_horizontal}>
-            <h4 className={styles.form_header}>Fill The From</h4>
+            <h4 className="form-header">Service Details</h4>
             <div className={styles.form_group}>
-              <label className="control-label col-md-2">Name</label>
               <div className="col-md-3">
+                <label className="control-label col-md-2">Name</label>
                 <input
                   required
                   className="form-control"
                   maxlenth="20"
                   minlenth="2"
-                  placeholder="First Name"
+                  placeholder=" Name"
                   onChange={(event) => {
-                    setNewFName(event.target.value);
+                    setNewName(event.target.value);
                   }}
                 />
               </div>
               <br />
-              <div className="col-md-3">
-                <input
-                  required
-                  className="form-control"
-                  maxlenth="20"
-                  minlenth="2"
-                  placeholder="Last Name"
-                  onChange={(event) => {
-                    setNewLName(event.target.value);
-                  }}
-                />
-              </div>
+            </div>
+            <div className={styles.form_group}>
+              <label className="control-label col-md-2">Date</label>
+              {/* <DatePicker
+                selected={newDate}
+                onChange={(date) => setnewDate(date)}
+              /> */}
             </div>
             <br />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <Stack spacing={3}>
-                <DateTimePicker
-                  renderInput={(params) => <TextField {...params} />}
-                  label="Select a date"
-                  value={value}
-                  onChange={(newValue) => {
-                    setValue(newValue);
-                  }}
-                  minDate={new Date("2022-02-14")}
-                  minTime={new Date(0, 0, 0, 8)}
-                  maxTime={new Date(0, 0, 0, 18, 45)}
-                />
-              </Stack>
-            </LocalizationProvider>
+            <div className={styles.form_group}>
+              <label className="control-label col-md-2">Time</label>
+            </div>
             <br />
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Address</label>
               <div className="col-md-7">
                 <input
-                  required
                   className="form-control"
                   placeholder="Address"
-                  type="text"
                   onChange={(event) => {
                     setNewAddress(event.target.value);
                   }}
                 />
               </div>
             </div>
-
-            <br />
             <div className={styles.form_group}>
-              <label className="control-label col-md-2">Contact</label>
+              <label className="control-label col-md-2">Email</label>
               <div className="col-md-7">
                 <input
-                  required
                   className="form-control"
-                  placeholder="E-mail"
-                  type="email"
+                  placeholder="***@gmail.com"
                   onChange={(event) => {
                     setNewEmail(event.target.value);
                   }}
                 />
               </div>
             </div>
-
-            <br />
             <div className={styles.form_group}>
-              <div className="col-md-7 col-md-offset-2">
+              <label className="control-label col-md-2">Contact Number</label>
+              <div className="col-md-7">
                 <input
-                  required
                   className="form-control"
                   placeholder="Phone (xxx)-xxx xxxx"
                   onChange={(event) => {
-                    setNewNumber(event.target.value);
+                    setNewnumber(event.target.value);
                   }}
                 />
               </div>
@@ -140,30 +130,25 @@ export const Comtemp1 = () => {
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
                 <button
+                  type="button"
                   className="btn btn-primary"
-                  disabled={
-                    (!newFName, !newLName, !newAddress, !newEmail, !newNumber)
-                  }
-                  onClick={() => {
-                    create();
-                    // setModalOpentemp1(true);
-                  }}
+                  onClick={create}
                 >
                   Submit
                 </button>
               </div>
             </div>
-
             <br />
             <div className={styles.button}>
-              <button type="button" className="btn btn-danger">
-                Cancel
-              </button>
+              <Link to="/Customerdash">
+                <button type="button" className="btn btn-danger">
+                  Cancel
+                </button>
+              </Link>
             </div>
           </form>
         </div>
       </div>
-      {modalOpentemp1 && <Modal setOpenModaltemp1={setModalOpentemp1} />}
     </div>
   );
 };

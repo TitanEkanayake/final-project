@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
+import styles from "./ComDash.module.css";
 import { db, auth } from "../../firebase/Firebase_con";
-import "./CustomerRes.css";
 import { Row, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { Helmet } from "react-helmet";
-import {
-  collection,
-  getDocs,
-  where,
-  deleteDoc,
-  query,
-} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const CustomerRes = () => {
+const RecordSelec = () => {
   const [user] = useAuthState(auth);
-  const userCollectionRef = collection(db, "bookings");
+  const userCollectionRef = collection(db, "service");
   const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
   //querie fuction
@@ -33,10 +28,7 @@ const CustomerRes = () => {
     getUsers();
   }, []);
 
-  // const docDelete = async (id) => {
-  //   const docRef = doc(db, "CustomerReservations", id);
-  //   await deleteDoc(docRef);
-  // };
+  let navigate = useNavigate();
 
   const renderCard = (card) => {
     return (
@@ -45,14 +37,22 @@ const CustomerRes = () => {
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
-            <Card.Text>{card.service}</Card.Text>
-            <Card.Text>{card.time}</Card.Text>
-            <Button variant="primary">Delete</Button>
+            <Card.Text>{card.description}</Card.Text>
+            <div className={styles.Btncom1}>
+              <Button
+                onClick={() => navigate(`/ComRecords/${card.id}`)}
+                variant="primary"
+              >
+                Open
+              </Button>
+            </div>
+            <div className={styles.Btncom2} />
           </Card.Body>
         </Card>
       </>
     );
   };
+
   return (
     <div className="hero-containery">
       <Helmet>
@@ -65,4 +65,4 @@ const CustomerRes = () => {
     </div>
   );
 };
-export default CustomerRes;
+export default RecordSelec;

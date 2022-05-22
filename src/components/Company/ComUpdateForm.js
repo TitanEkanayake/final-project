@@ -1,47 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Walkthrough.module.css";
-import { Link } from "react-router-dom";
-import { db } from "../../firebase/Firebase_con";
-import { collection, addDoc } from "firebase/firestore";
+import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase/Firebase_con";
-import { useNavigate, useParams } from "react-router-dom";
+import { db, auth } from "../../firebase/Firebase_con";
+import { Link, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
 
-const ComResSelec = () => {
+const ComUpdateForm = () => {
   const [user] = useAuthState(auth);
+  const { register, setValue, handleSubmit } = useForm();
+  const [userDocument, setUserDocument] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const { id } = useParams();
+  const uid = user ? user.uid : null;
+  // data
   const [newTime, setNewTime] = useState();
   const [newTime1, setNewTime1] = useState();
   const [newDate, setnewDate] = useState(new Date());
-  const [newName, setNewName] = useState("");
-  const [newDis, setNewDis] = useState("");
-  const uid = user ? user.uid : null;
-  const usersCollectionRef = collection(db, "company", uid, "service");
-  const navigate = useNavigate();
-  newDate.toString();
 
-  const create = async () => {
-    if ((!newName, !newDis)) alert("Please enter name!");
-    else {
-      try {
-        await addDoc(usersCollectionRef, {
-          name: newName,
-          Description: newDis,
-          uid,
-          date: newDate,
-          time: newTime,
-          toTime: newTime1,
-        });
-        alert("Service Added");
-        navigate("/comdash");
-      } catch (error) {
-        console.log(error);
-        alert("There was a Error");
+  useEffect(() => {
+    const docRef = doc(db, "company", uid, "service", id);
+    const unsubscribe = onSnapshot(docRef, (doc) => {
+      if (doc.exists) {
+        const documentData = doc.data();
+        setUserDocument(documentData);
+        for (const [key, value] of Object.entries(documentData)) {
+          setValue(key, value);
+        }
       }
+    });
+    return unsubscribe;
+  }, [id, setValue]);
+
+  const updateUserDocument = async (data) =>
+    updateDoc(doc(db, "service", id), data);
+
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+      await updateUserDocument({ id: id, ...data });
+      alert("Updated!");
+    } catch (error) {
+      console.log(error);
+      alert("Theres a error!");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (!userDocument) {
+    return null;
+  }
 
   return (
     <div className={styles.bg0}>
@@ -59,7 +71,10 @@ const ComResSelec = () => {
       />
       <div className={styles.containerz}>
         <div className={styles.form_c}>
-          <form className={styles.form_horizontal}>
+          <form
+            className={styles.form_horizontal}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <h4 className="form-header">Service Details</h4>
             <div className={styles.form_group}>
               <div className="col-md-3">
@@ -70,9 +85,7 @@ const ComResSelec = () => {
                   maxlenth="20"
                   minlenth="2"
                   placeholder=" Name"
-                  onChange={(event) => {
-                    setNewName(event.target.value);
-                  }}
+                  {...register("name")}
                 />
               </div>
               <br />
@@ -98,20 +111,14 @@ const ComResSelec = () => {
                   className="form-control"
                   placeholder="Discription"
                   rows={5}
-                  onChange={(event) => {
-                    setNewDis(event.target.value);
-                  }}
+                  {...register("Description")}
                 />
               </div>
             </div>
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={create}
-                >
+                <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
               </div>
@@ -120,7 +127,7 @@ const ComResSelec = () => {
             <div className={styles.button}>
               <Link to="/ComDash">
                 <button type="button" className="btn btn-danger">
-                  Cancel
+                  Back
                 </button>
               </Link>
             </div>
@@ -130,4 +137,4 @@ const ComResSelec = () => {
     </div>
   );
 };
-export default ComResSelec;
+export default ComUpdateForm;

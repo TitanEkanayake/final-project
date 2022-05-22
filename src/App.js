@@ -26,7 +26,8 @@ import Comtemp1 from "./components/Company/Comtemp1";
 import Comtemp2 from "./components/Company/Comtemp2";
 import ComRecords from "./components/Company/ComRecords";
 import ComResSelec from "./components/Company/ComResSelec";
-import { UserProvider } from "./firebase/UserProvider";
+import ComUpdateForm from "./components/Company/ComUpdateForm";
+import RecordSelec from "./components/Company/RecordSelec";
 
 const navEnabled = [
   "/",
@@ -45,7 +46,13 @@ const sideEnabled = [
   "Comtemp1",
   "Comtemp2",
 ];
-const sideEnabled2 = ["ComDash", "ComProfile", "ComRecords", "ComResSelec"];
+const sideEnabled2 = [
+  "ComDash",
+  "ComProfile",
+  "ComRecords",
+  "ComResSelec",
+  "RecordSelec",
+];
 
 const App = () => {
   const { pathname } = useLocation();
@@ -83,7 +90,7 @@ const App = () => {
         {enableside2() && <Compside />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Aboutus" element={<Aboutus />} />
+          <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/Contactus" element={<Contactus />} />
           <Route path="/Customerdash" element={<CustomerDash />} />
           <Route path="/Customerprofile" element={<Customerprofile />} />
@@ -92,13 +99,15 @@ const App = () => {
           <Route path="/walkthrough" element={<Walkthrough />} />
           <Route path="/ComDash" element={<ComDash />} />
           <Route path="/ComProfile" element={<ComProfile />} />
-          <Route path="/Comtemp1" element={<Comtemp1 />} />
+          <Route path="/Comtemp1/:id" element={<Comtemp1 />} />
           <Route path="/Comtemp2" element={<Comtemp2 />} />
           <Route path="/ComRecords" element={<ComRecords />} />
-          <Route path="/ComResSelec" element={<ComResSelec />} />
+          <Route path="/ComResSelec/:id" element={<ComResSelec />} />
           <Route path="/Selection" element={<Selection />} />
           <Route path="/Customerlogin" element={<CustomerLogin />} />
           <Route path="/Companylogin" element={<CompanyLogin />} />
+          <Route path="/Compupdateform/:id" element={<ComUpdateForm />} />
+          <Route path="/RecordSelec" element={<RecordSelec />} />
         </Routes>
         {enableNav() && <Footer />}
       </div>
@@ -110,6 +119,7 @@ const App = () => {
       {enableside2() && <Compside />}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/Selection" element={<Selection />} />
         <Route path="/Customerlogin" element={<CustomerLogin />} />
         <Route path="/Companylogin" element={<CompanyLogin />} />

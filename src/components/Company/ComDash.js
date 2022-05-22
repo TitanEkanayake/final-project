@@ -1,15 +1,26 @@
 import { useState, useEffect } from "react";
 import styles from "./ComDash.module.css";
-import { db } from "../../firebase/Firebase_con";
+import { db, auth } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  where,
+  deleteDoc,
+  doc,
+  query,
+} from "firebase/firestore";
 import { Helmet } from "react-helmet";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-export const ComDash = () => {
-  const userCollectionRef = collection(db, "ComDash");
+export const ComDash = (main) => {
+  const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
+  //querie fuction
+  const uid = user ? user.uid : null;
+  const userCollectionRef = collection(db, "company", uid, "service");
 
   const getUsers = async () => {
     setLoading(true);
@@ -25,6 +36,14 @@ export const ComDash = () => {
 
   let navigate = useNavigate();
 
+  // delete
+  const deleteDocument = async (id) => {
+    await collection("service")
+      .doc(id)
+      .deleteDoc();
+    console.log(id);
+  };
+
   const renderCard = (card) => {
     return (
       <>
@@ -35,17 +54,14 @@ export const ComDash = () => {
             <Card.Text>{card.Description}</Card.Text>
             <div className={styles.Btncom1}>
               <Button
-                onClick={() => navigate(`/ComResSelec/${card.id}`)}
+                onClick={() => navigate(`/Compupdateform/${card.id}`)}
                 variant="primary"
               >
                 Update
               </Button>
             </div>
             <div className={styles.Btncom2}>
-              <Button
-                onClick={() => navigate(`#/${card.id}`)}
-                variant="primary"
-              >
+              <Button onClick={() => deleteDocument("")} variant="primary">
                 Delete
               </Button>
             </div>
@@ -73,7 +89,7 @@ export const ComDash = () => {
               <Card.Title>{"Add your Service"}</Card.Title>
               <div className={styles.Btncom1}>
                 <Button
-                  onClick={() => navigate(`/ComResSelec`)}
+                  onClick={() => navigate(`/ComResSelec/${uid}`)}
                   variant="primary"
                 >
                   Add....

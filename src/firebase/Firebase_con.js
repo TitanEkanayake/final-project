@@ -48,8 +48,8 @@ const signInWithGoogle = async () => {
     if (docs.docs.length === 0) {
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
+        authProvider: "local",
         name: user.displayName,
-        authProvider: "google",
         email: user.email,
       });
     }
@@ -70,15 +70,7 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (
-  name,
-  email,
-  password,
-  gender,
-  Address,
-  Dob,
-  number
-) => {
+const registerWithEmailAndPassword = async (name, email, password) => {
   if (!email || !password || !name) {
     return alert("Values are empty!");
   }

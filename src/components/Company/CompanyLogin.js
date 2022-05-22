@@ -1,21 +1,34 @@
-import { React, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
+import { auth, logInWithEmailAndPassword } from "../../firebase/Firebase_con";
 import "./CompanyLogin.css";
-import { Link } from "react-router-dom";
-
-// exports.setAdminClaims = functions.https.onCall(async (data, context) => {
-
-//   // If necessary check the uid of the caller, via the context object
-
-//   const adminUIDs = ['2jfow4fd3H2ZqYLWZI2s1YdqOPB42', '767fjdhshd3H2ZqYLWZI2suyyqOPB42'];
-
-//   await Promise.all(adminUIDs.map(uid => admin.auth().setCustomUserClaims(uid, { admin: true })));
-
-//   return { result: "Operation completed" }
-
-// })
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function CompanyLogin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [user, loading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    const fetchClaims = async () => {
+      const { claims } = await user.getIdTokenResult();
+      if (claims?.admin) {
+        navigate("/comdash");
+      } else {
+        alert("User is not a Admin!");
+        navigate("/companylogin");
+      }
+    };
+
+    if (user) fetchClaims();
+  }, [user, loading]);
+
   return (
     <div className="hero-containerx">
       <div>
@@ -27,29 +40,25 @@ function CompanyLogin() {
               name="tab"
               className="sign-in"
               checked
-              // onChange={(e) => setInitialTab(e.target.checked)}
             />
             <label htmlFor="tab-1" className="tab">
               Sign In
             </label>
-            <input
-              id="tab-2"
-              type="radio"
-              name="tab"
-              className="sign-up"
-              // checked={!initialTab}
-              // onChange={(e) => setInitialTab(e.target.checked)}
-            />
-            <label htmlFor="tab-2" className="tab">
-              Sign Up
-            </label>
+            <input id="tab-2" type="radio" name="tab" className="sign-up" />
+            <label htmlFor="tab-2" className="tab" />
             <div className="login-form">
               <div className="sign-in-htm">
                 <div className="group">
                   <label htmlFor="user" className="label">
-                    Company ID
+                    E-mail
                   </label>
-                  <input id="user" type="text" className="input" />
+                  <input
+                    id="user"
+                    type="text"
+                    className="input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
                 <div className="group">
                   <label htmlFor="pass" className="label">
@@ -60,83 +69,21 @@ function CompanyLogin() {
                     type="password"
                     className="input"
                     data-type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="group">
-                  <Form>
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="Keep me Signed in"
-                      readOnly
-                    />
-                  </Form>
-                </div>
-                <div className="group">
-                  <Link to="/ComDash">
-                    <input type="submit" className="button" value="Sign In" />
-                  </Link>
+                  <input
+                    type="submit"
+                    className="button"
+                    value="Sign In"
+                    onClick={() => logInWithEmailAndPassword(email, password)}
+                  />
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">
                   <a href="#forgot">Forgot Password?</a>
-                </div>
-              </div>
-              <div className="sign-up-htm">
-                <div className="group">
-                  <label htmlFor="user" className="label">
-                    Company Name
-                  </label>
-                  <input id="user" type="text" className="input" />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Password
-                  </label>
-                  <input
-                    id="pass"
-                    type="password"
-                    className="input"
-                    data-type="password"
-                  />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Repeat Password
-                  </label>
-                  <input
-                    id="pass"
-                    type="password"
-                    className="input"
-                    data-type="password"
-                  />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Company Address
-                  </label>
-                  <input id="pass" type="text" className="input" />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Contact Number
-                  </label>
-                  <input id="pass" type="text" className="input" />
-                </div>
-                <div className="group">
-                  <label htmlFor="pass" className="label">
-                    Company Email Address
-                  </label>
-                  <input id="pass" type="text" className="input" />
-                </div>
-                <div className="group">
-                  <Link to="/walkthrough">
-                    <input type="submit" className="button" value="Sign Up" />
-                  </Link>
-                </div>
-                <div className="hr" />
-                <div className="foot-lnk">
-                  <label htmlFor="tab-1">Already Member?</label>
                 </div>
               </div>
             </div>

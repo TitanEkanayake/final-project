@@ -1,43 +1,48 @@
-import { React, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ComProfile.module.css";
+import { useForm } from "react-hook-form";
+import { auth, db } from "../../firebase/Firebase_con";
+import { updateUserDocument } from "../../firebase/Firebase_con";
 import { Link } from "react-router-dom";
-import { storage } from "../../firebase/Firebase_con";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const ComProfile = () => {
-  const [image, setImage] = useState(null);
+  const { register, setValue, handleSubmit } = useForm();
+  const [userDocument, setUserDocument] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const [user] = useAuthState(auth);
 
-  // This function will be triggered when the file field change
-  const imageChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+  useEffect(() => {
+    const docRef = doc(db, "company", user.uid);
+    const unsubscribe = onSnapshot(docRef, (doc) => {
+      if (doc.exists) {
+        const documentData = doc.data();
+        setUserDocument(documentData);
+        for (const [key, value] of Object.entries(documentData)) {
+          setValue(key, value);
+        }
+      }
+    });
+    return unsubscribe;
+  }, [user.uid, setValue]);
+
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+      await updateUserDocument({ uid: user?.uid, ...data });
+      alert("Updated!");
+    } catch (error) {
+      console.log(error);
+      alert("Theres a error!");
+    } finally {
+      setLoading(false);
     }
   };
-  //imagedb
-  const imageUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "stage_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            //console.log(url);
-          });
-      }
-    );
-  };
-  console.log("image: ", image);
 
-  // This function will be triggered when the "Remove This Image" button is clicked
-  const removeimage = () => {
-    setImage();
-  };
+  if (!userDocument) {
+    return null;
+  }
   return (
     <div className={styles.bg0}>
       <meta charSet="utf-8" />
@@ -53,67 +58,21 @@ const ComProfile = () => {
       />
       <div className={styles.containerz}>
         <div className={styles.form_c}>
-          <form className={styles.form_horizontal}>
+          <form
+            className={styles.form_horizontal}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <h4 className={styles.form_header}>Fill The From</h4>
             <br />
-            <div className={styles.previewComponent}>
-              {image && (
-                <div className={styles.preview}>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    className={styles.image}
-                    alt="Thumb"
-                  />
-                  <button onClick={removeimage} className={styles.delete}>
-                    Remove
-                  </button>
-                </div>
-              )}
-              <input accept="image/*" type="file" onChange={imageChange} />
-            </div>
+            <div className={styles.previewComponent} />
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Name</label>
-              <div className="col-md-1">
-                <select required className="form-control">
-                  <option>Mr</option>
-                  <option>Mrs</option>
-                </select>
-              </div>
               <div className="col-md-3">
                 <input
                   required
                   className="form-control"
-                  maxlenth="20"
-                  minlenth="2"
-                  placeholder="First Name"
+                  {...register("name")}
                 />
-              </div>
-              <div className="col-md-3">
-                <input
-                  required
-                  className="form-control"
-                  maxlenth="20"
-                  minlenth="2"
-                  placeholder="Last Name"
-                />
-              </div>
-            </div>
-            <br />
-            <div className={styles.form_group}>
-              <label className="control-label col-md-2">Age</label>
-
-              <div className="col-md-2">
-                <input
-                  required
-                  className="form-control"
-                  type="number"
-                  placeholder=" years"
-                  min={0}
-                />
-              </div>
-              <br />
-              <div className="col-md-2">
-                <input required className="form-control" type="date" />
               </div>
             </div>
             <br />
@@ -123,43 +82,39 @@ const ComProfile = () => {
                 <input
                   required
                   className="form-control"
-                  placeholder="Address"
-                  type="text"
+                  {...register("address")}
                 />
               </div>
             </div>
-
-            <br />
-            <div className={styles.form_group}>
-              <label className="control-label col-md-2">Contact</label>
-              <div className="col-md-7">
-                <input
-                  required
-                  className="form-control"
-                  placeholder="E-mail"
-                  type="email"
-                />
-              </div>
-            </div>
-
             <br />
             <div className={styles.form_group}>
               <div className="col-md-7 col-md-offset-2">
+                <label className="control-label col-md-2">Contact Number</label>
                 <input
                   required
                   className="form-control"
                   placeholder="Phone (xxx)-xxx xxxx"
+                  {...register("number")}
+                />
+              </div>
+            </div>
+            <br />
+            <div className={styles.form_group}>
+              <div className="col-6">
+                <label className="control-label col-md-2">
+                  Company Description
+                </label>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  {...register("description")}
                 />
               </div>
             </div>
             <br />
             <div className={styles.button}>
               <div className="col-md-6 col-md-offset-2">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={imageUpload}
-                >
+                <button type="submit" className="btn btn-primary">
                   Update Profile
                 </button>
               </div>

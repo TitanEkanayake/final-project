@@ -11,7 +11,7 @@ const CustomerProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
   const [userDocument, setUserDocument] = useState(null);
   const [isLoading, setLoading] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const docRef = doc(db, "users", user.uid);
@@ -31,6 +31,7 @@ const CustomerProfile = () => {
     try {
       setLoading(true);
       await updateUserDocument({ uid: user?.uid, ...data });
+      alert("Updated!");
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,7 +81,7 @@ const CustomerProfile = () => {
             <br />
             <label className="control-label col-md-2">Gender</label>
             <div className="col-md-1">
-              <select required className="form-control">
+              <select required className="form-control" {...register("gender")}>
                 <option>Male</option>
                 <option>Female</option>
               </select>
@@ -88,13 +89,23 @@ const CustomerProfile = () => {
 
             <div className="col-md-7">
               <label className="control-label col-md-2">Address</label>
-              <input required className="form-control" type="text" />
+              <input
+                required
+                className="form-control"
+                type="text"
+                {...register("address")}
+              />
             </div>
           </div>
           <div className={styles.form_group}>
             <div className="col-md-2">
               <label className="control-label col-md-2">Date of birth</label>
-              <input required className="form-control" type="date" />
+              <input
+                required
+                className="form-control"
+                type="date"
+                {...register("dob")}
+              />
             </div>
             <br />
 
@@ -116,8 +127,13 @@ const CustomerProfile = () => {
           <div className={styles.form_group}>
             <div className="col-md-7 col-md-offset-2">
               <label>
-                Number
-                <input required className="form-control" type="text" />{" "}
+                Mobile Number
+                <input
+                  required
+                  className="form-control"
+                  type="text"
+                  {...register("number")}
+                />
               </label>
             </div>
           </div>
