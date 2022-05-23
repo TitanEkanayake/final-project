@@ -3,7 +3,7 @@ import styles from "./ComDash.module.css";
 import { db, auth } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { Helmet } from "react-helmet";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -31,10 +31,15 @@ export const ComDash = (main) => {
 
   // delete
   const deleteDocument = async (id) => {
-    await collection("service")
-      .doc(id)
-      .deleteDoc();
-    console.log(id);
+    const userDoc = doc(db, "company", uid, "service", id);
+    await deleteDoc(userDoc)
+      .then(() => {
+        alert("Deleted");
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        alert("Unable to delete Error!:" + error);
+      });
   };
 
   const renderCard = (card) => {
@@ -54,7 +59,12 @@ export const ComDash = (main) => {
               </Button>
             </div>
             <div className={styles.Btncom2}>
-              <Button onClick variant="primary">
+              <Button
+                onClick={() => {
+                  deleteDocument(card.id);
+                }}
+                variant="primary"
+              >
                 Delete
               </Button>
             </div>

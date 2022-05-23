@@ -96,7 +96,7 @@ const ComResSelec = () => {
               <div className="col-md-7">
                 <textarea
                   className="form-control"
-                  placeholder="Discription"
+                  placeholder="Description"
                   rows={5}
                   onChange={(event) => {
                     setNewDis(event.target.value);

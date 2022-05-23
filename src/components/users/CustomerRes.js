@@ -9,6 +9,7 @@ import {
   where,
   deleteDoc,
   query,
+  doc,
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -33,10 +34,18 @@ const CustomerRes = () => {
     getUsers();
   }, []);
 
-  // const docDelete = async (id) => {
-  //   const docRef = doc(db, "CustomerReservations", id);
-  //   await deleteDoc(docRef);
-  // };
+  // delete
+  const deleteDocument = async (id) => {
+    const userDoc = doc(db, "bookings", id);
+    await deleteDoc(userDoc)
+      .then(() => {
+        alert("Deleted");
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        alert("Unable to delete Error!:" + error);
+      });
+  };
 
   const renderCard = (card) => {
     return (
@@ -47,7 +56,14 @@ const CustomerRes = () => {
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>{card.service}</Card.Text>
             <Card.Text>{card.time}</Card.Text>
-            <Button variant="primary">Delete</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                deleteDocument(card.id);
+              }}
+            >
+              Delete
+            </Button>
           </Card.Body>
         </Card>
       </>
