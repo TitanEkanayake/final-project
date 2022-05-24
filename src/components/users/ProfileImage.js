@@ -1,44 +1,61 @@
-import React, { useRef, useState, useEffect } from "react";
-import { uploadImage, getDownloadUrl } from "../../firebase/Firebase_con";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import React, { useState, useEffect } from "react";
+import { storage, auth } from "../../firebase/Firebase_con";
+import image from "../../assets/videos/profile-placeholder.png";
+import { updateProfile } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import "./ProfileImage.css";
 
-export const ProfileImage = ({ id }) => {
-  const fileInput = useRef(null);
-  const [imageUrl, setImageUrl] = useState("");
-  const [uploadProgress, setUploadProgress] = useState(0);
+export const ProfileImage = () => {
+  const [User] = useAuthState(auth);
+  const [photo, setPhoto] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [photoURL, setPhotoURL] = useState(image);
+
+  async function upload(file, User, setLoading) {
+    const fileRef = ref(storage, User.uid);
+
+    setLoading(true);
+
+    const snapshot = await uploadBytes(fileRef, file);
+    const photoURL = await getDownloadURL(fileRef);
+
+    updateProfile(User, { photoURL });
+
+    setLoading(false);
+    alert("Uploaded file!");
+    window.location.reload(false);
+  }
+  function handleChange(e) {
+    if (e.target.files[0]) {
+      setPhoto(e.target.files[0]);
+    }
+  }
+
+  function handleClick() {
+    upload(photo, User, setLoading);
+  }
 
   useEffect(() => {
-    getDownloadUrl(id).then((url) => !!url && setImageUrl(url));
-  }, [id]);
-
-  const fileChange = async (files) => {
-    const ref = await uploadImage(id, files[0], updateProgress);
-    const downloadUrl = await ref.getDownloadURL();
-    setImageUrl(downloadUrl);
-  };
-
-  const updateProgress = (snapshot) => {
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    setUploadProgress(progress);
-  };
+    if (User?.photoURL) {
+      setPhotoURL(User.photoURL);
+    }
+  }, [User]);
 
   return (
     <div className="four wide column profile-image">
-      <img
-        className="ui image"
-        src={imageUrl || "/profile-placeholder.png"}
-        alt="profile"
-      />
+      <img alt="avatar" className="avatar" src={photoURL} />
       <input
         className="file-input"
         type="file"
         accept=".png,.jpg"
-        ref={fileInput}
-        onChange={(e) => fileChange(e.target.files)}
+        onChange={handleChange}
       />
-      <progress style={{ width: "100%" }} max="100" value={uploadProgress} />
+      <br />
       <button
-        className="ui grey button upload-button"
-        onClick={() => fileInput.current.click()}
+        className="btn btn-primary"
+        disabled={loading || !photo}
+        onClick={handleClick}
       >
         Upload Photo
       </button>

@@ -6,6 +6,7 @@ import { updateUserDocument } from "../../firebase/Firebase_con";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, onSnapshot } from "firebase/firestore";
+import { ProfileImage } from "../users/ProfileImage";
 
 const ComProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
@@ -64,7 +65,9 @@ const ComProfile = () => {
           >
             <h4 className={styles.form_header}>Fill The From</h4>
             <br />
-            <div className={styles.previewComponent} />
+            <div className={styles.previewComponent}>
+              <ProfileImage id={user?.uid} />
+            </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Name</label>
               <div className="col-md-3">

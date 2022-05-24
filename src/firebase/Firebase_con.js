@@ -14,7 +14,6 @@ import {
   getDocs,
   collection,
   where,
-  addDoc,
   setDoc,
   doc,
   updateDoc,
@@ -104,34 +103,6 @@ const sendPasswordReset = async (email) => {
 const logout = () => {
   signOut(auth);
 };
-//imageupload
-const uploadImage = (userId, file, progress) => {
-  return new Promise((resolve, reject) => {
-    // create file reference
-    const filePath = `users/${userId}/profile-image`;
-    const fileRef = storage.ref().child(filePath);
-
-    // upload task
-    const uploadTask = fileRef.put(file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => progress(snapshot),
-      (error) => reject(error),
-      () => {
-        resolve(uploadTask.snapshot.ref);
-      }
-    );
-  });
-};
-
-const getDownloadUrl = (userId) => {
-  const filePath = `users/${userId}/profile-image`;
-  return storage
-    .ref()
-    .child(filePath)
-    .getDownloadURL();
-};
 
 // updateUserDocument
 export const updateUserDocument = async (user) =>
@@ -146,6 +117,4 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
-  uploadImage,
-  getDownloadUrl,
 };

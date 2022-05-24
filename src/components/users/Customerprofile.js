@@ -6,6 +6,7 @@ import styles from "./Customerprofile.module.css";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, onSnapshot } from "firebase/firestore";
+import { ProfileImage } from "./ProfileImage";
 
 const CustomerProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
@@ -65,17 +66,13 @@ const CustomerProfile = () => {
         >
           <h4 className={styles.form_header}>Profile</h4>
           <div className={styles.previewComponent}>
-            {/* <ProfileImage id={user?.uid} /> */}
+            <ProfileImage id={user?.uid} />
           </div>
           <div className={styles.form_group}>
             <div className="col-md-3">
               <label>
                 Name
-                <input
-                  required
-                  className="form-control"
-                  {...register("name")}
-                />
+                <input className="form-control" {...register("name")} />
               </label>
             </div>
             <br />
@@ -90,7 +87,6 @@ const CustomerProfile = () => {
             <div className="col-md-7">
               <label className="control-label col-md-2">Address</label>
               <input
-                required
                 className="form-control"
                 type="text"
                 {...register("address")}
@@ -101,14 +97,12 @@ const CustomerProfile = () => {
             <div className="col-md-2">
               <label className="control-label col-md-2">Date of birth</label>
               <input
-                required
                 className="form-control"
                 type="date"
                 {...register("dob")}
               />
             </div>
             <br />
-
             <label className="control-label col-md-2">Contact</label>
             <div className="col-md-7">
               <label>
@@ -116,7 +110,6 @@ const CustomerProfile = () => {
                 <input
                   disabled
                   {...register("email")}
-                  required
                   className="form-control"
                   placeholder="E-mail"
                   type="email"
@@ -129,7 +122,6 @@ const CustomerProfile = () => {
               <label>
                 Mobile Number
                 <input
-                  required
                   className="form-control"
                   type="text"
                   {...register("number")}
