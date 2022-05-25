@@ -7,7 +7,7 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { Helmet } from "react-helmet";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export const ComDash = (main) => {
+export const ComDash = () => {
   const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
@@ -46,7 +46,12 @@ export const ComDash = (main) => {
     return (
       <>
         <Card style={{ width: "18rem", margin: "10px" }}>
-          <Card.Img variant="top" src={card.image} />
+          <Card.Img
+            variant="top"
+            src={
+              "https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170"
+            }
+          />
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>{card.Description}</Card.Text>
@@ -85,7 +90,7 @@ export const ComDash = (main) => {
             <Card.Img
               variant="top"
               src={
-                "https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                "https://images.unsplash.com/photo-1512314889357-e157c22f938d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171"
               }
             />
             <Card.Body>

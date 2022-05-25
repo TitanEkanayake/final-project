@@ -108,6 +108,10 @@ const logout = () => {
 export const updateUserDocument = async (user) =>
   updateDoc(doc(db, "users", user.uid), user);
 
+// updateComDocument
+export const updateComDocument = async (user) =>
+  updateDoc(doc(db, "company", user.uid), user);
+
 export {
   auth,
   db,

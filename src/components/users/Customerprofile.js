@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import styles from "./Customerprofile.module.css";
 import { useForm } from "react-hook-form";
 import { auth, db } from "../../firebase/Firebase_con";
 import { updateUserDocument } from "../../firebase/Firebase_con";
-import styles from "./Customerprofile.module.css";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, onSnapshot } from "firebase/firestore";

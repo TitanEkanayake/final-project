@@ -4,10 +4,10 @@ import { storage, auth, db } from "../../firebase/Firebase_con";
 import image from "../../assets/videos/profile-placeholder.png";
 import { updateProfile } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./ProfileImage.css";
+import "../users/ProfileImage.css";
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 
-export const ProfileImage = () => {
+export const CProfileImage = () => {
   const [User] = useAuthState(auth);
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ export const ProfileImage = () => {
 
   function handleClick() {
     upload(photo, User, setLoading);
-    updateDoc(doc(db, "users", uid), { image: photoURL });
+    updateDoc(doc(db, "company", uid), { image: photoURL });
   }
 
   useEffect(() => {
@@ -44,7 +44,6 @@ export const ProfileImage = () => {
       setPhotoURL(User.photoURL);
     }
   }, [User]);
-
   return (
     <div className="four wide column profile-image">
       <img alt="avatar" className="avatar" src={photoURL} />

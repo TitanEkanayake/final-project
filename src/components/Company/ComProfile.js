@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./ComProfile.module.css";
 import { useForm } from "react-hook-form";
 import { auth, db } from "../../firebase/Firebase_con";
-import { updateUserDocument } from "../../firebase/Firebase_con";
+import { updateComDocument } from "../../firebase/Firebase_con";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, onSnapshot } from "firebase/firestore";
-import { ProfileImage } from "../users/ProfileImage";
+import { CProfileImage } from "./CProfileImage";
 
 const ComProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
@@ -31,7 +31,7 @@ const ComProfile = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      await updateUserDocument({ uid: user?.uid, ...data });
+      await updateComDocument({ uid: user?.uid, ...data });
       alert("Updated!");
     } catch (error) {
       console.log(error);
@@ -66,7 +66,7 @@ const ComProfile = () => {
             <h4 className={styles.form_header}>Fill The From</h4>
             <br />
             <div className={styles.previewComponent}>
-              <ProfileImage id={user?.uid} />
+              <CProfileImage id={user?.uid} />
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Name</label>
