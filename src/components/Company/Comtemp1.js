@@ -1,27 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Comtemp1.module.css";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase/Firebase_con";
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  setDoc,
+  DocumentSnapshot,
+} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/Firebase_con";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import Stack from "@mui/material/Stack";
 
 export const Comtemp1 = () => {
   const [user] = useAuthState(auth);
-  const { id } = useParams();
+  const { cardid, id } = useParams();
   const [newEmail, setNewEmail] = useState();
   const [newNumber, setNewnumber] = useState();
-  const [newDate, setnewDate] = useState(new Date());
+  const [value, setValue] = React.useState(new Date());
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
   const uid = user ? user.uid : null;
   const usersCollectionRef = collection(db, "bookings");
   const navigate = useNavigate();
-  newDate.toString();
+  value.toString();
+  const dateTimeRef = doc(db, "company", id, "service", cardid);
+
+  const fetchdate = async () => {
+    const snapshot = await getDoc(doc(db, "company", id, "service", cardid));
+    if (snapshot.exists()) {
+      console.log("service data:", snapshot.data());
+    } else {
+      console.log("no such document");
+    }
+  };
+  useEffect(() => {
+    fetchdate();
+  }, []);
 
   const create = async () => {
     if ((!newName, !newAddress)) alert("Please enter name!");
@@ -31,9 +56,11 @@ export const Comtemp1 = () => {
           name: newName,
           address: newAddress,
           uid,
+          datetime: value,
           email: newEmail,
           number: newNumber,
           compId: id,
+          serviceId: cardid,
         });
         alert("Service Added");
         navigate("/Customerdash");
@@ -78,16 +105,24 @@ export const Comtemp1 = () => {
               </div>
               <br />
             </div>
-            <div className={styles.form_group}>
-              <label className="control-label col-md-2">Date</label>
-              {/* <DatePicker
-                selected={newDate}
-                onChange={(date) => setnewDate(date)}
-              /> */}
-            </div>
+            <label className="control-label col-md-2">Date</label>
             <br />
             <div className={styles.form_group}>
-              <label className="control-label col-md-2">Time</label>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Stack spacing={3}>
+                  <DateTimePicker
+                    renderInput={(params) => <TextField {...params} />}
+                    label="Select a date"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    minDate={new Date("2020-02-14")}
+                    minTime={new Date(0, 0, 0, 8)}
+                    maxTime={new Date(0, 0, 0, 18, 45)}
+                  />
+                </Stack>
+              </LocalizationProvider>
             </div>
             <br />
             <div className={styles.form_group}>

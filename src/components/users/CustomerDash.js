@@ -4,6 +4,7 @@ import { db } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getDocs } from "firebase/firestore";
+import { Helmet } from "react-helmet";
 
 function CustomerDash() {
   const [users, setusers] = useState([]);
@@ -28,7 +29,7 @@ function CustomerDash() {
   const search = (value) => {
     const items = [...users];
     const filtered = items.filter(
-      (e) => e.title.toLowerCase().search(value.toLowerCase()) != -1
+      (e) => e.name.toLowerCase().search(value.toLowerCase()) != -1
     );
     if (value == "") {
       setfiltered(users);
@@ -51,7 +52,7 @@ function CustomerDash() {
             onClick={() => navigate(`/CustomerInsdeRes/${card.id}`)}
             variant="primary"
           >
-            Reserve
+            Open
           </Button>
         </Card.Body>
       </Card>
@@ -59,6 +60,9 @@ function CustomerDash() {
   };
   return (
     <div className="hero-containery">
+      <Helmet>
+        <style>{"body { background-color: lightgray ; }"}</style>
+      </Helmet>
       <div className="search-box">
         <button className="btn-search">
           <i className="fas fa-search" />

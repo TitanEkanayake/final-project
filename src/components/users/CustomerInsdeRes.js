@@ -3,7 +3,7 @@ import "./CustomerInsdeRes.css";
 import { db } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { collection, getDocs, where, query } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const CustomerInsdeRes = () => {
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ const CustomerInsdeRes = () => {
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>{card.description}</Card.Text>
             <Button
-              onClick={() => navigate(`/Comtemp1/${id}`)}
+              onClick={() => navigate(`/Comtemp1/${card.id}/${id}`)}
               variant="primary"
               placeholder="First Name"
             >

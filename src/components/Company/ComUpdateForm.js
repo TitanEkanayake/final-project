@@ -19,7 +19,7 @@ const ComUpdateForm = () => {
   // data
   const [newTime, setNewTime] = useState();
   const [newTime1, setNewTime1] = useState();
-  const [newDate, setnewDate] = useState(new Date());
+  // newDate.toString();
 
   useEffect(() => {
     const docRef = doc(db, "company", uid, "service", id);
@@ -36,7 +36,7 @@ const ComUpdateForm = () => {
   }, [id, setValue]);
 
   const updateUserDocument = async (data) =>
-    updateDoc(doc(db, "service", id), data);
+    updateDoc(doc(db, "company", uid, "service", id), data);
 
   const onSubmit = async (data) => {
     try {
@@ -92,16 +92,25 @@ const ComUpdateForm = () => {
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Date</label>
-              <DatePicker
-                selected={newDate}
-                onChange={(date) => setnewDate(date)}
+              <input
+                className="form-control"
+                type="date"
+                {...register("date")}
               />
             </div>
             <br />
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Time</label>
-              <TimePicker onChange={setNewTime} value={newTime} />
-              <TimePicker onChange={setNewTime1} value={newTime1} />
+              <input
+                className="form-control"
+                type="time"
+                {...register("time")}
+              />
+              <input
+                className="form-control"
+                type="time"
+                {...register("toTime")}
+              />
             </div>
             <br />
             <div className={styles.form_group}>

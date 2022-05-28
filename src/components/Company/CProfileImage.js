@@ -5,7 +5,7 @@ import image from "../../assets/videos/profile-placeholder.png";
 import { updateProfile } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "../users/ProfileImage.css";
-import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 export const CProfileImage = () => {
   const [User] = useAuthState(auth);
