@@ -2,14 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Comtemp1.module.css";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase/Firebase_con";
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  setDoc,
-  DocumentSnapshot,
-} from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/Firebase_con";
 import { useNavigate, useParams } from "react-router-dom";

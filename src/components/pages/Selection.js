@@ -7,6 +7,7 @@ class Selection extends Component {
   render() {
     return (
       <div className="hero-container1">
+        <h1>Select your Choice</h1>
         <Container>
           <Row>
             <Col>
@@ -16,29 +17,22 @@ class Selection extends Component {
                   alt="sample42"
                 />
                 <figcaption>
-                  <h2>
-                    <span>Customer</span>
-                  </h2>
-                  <p>So you can imagine your fears with less distraction.</p>
-                  <Link to="/CustomerLogin"></Link>
+                  <h1>Customer</h1>
+                  <p>Login or Sign up as a Customer</p>
+                  <Link to="/CustomerLogin" />
                 </figcaption>
               </figure>
             </Col>
             <Col>
               <figure className="snip0016">
                 <img
-                  src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                  src="https://images.unsplash.com/photo-1554232456-8727aae0cfa4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
                   alt="sample42"
                 />
                 <figcaption>
-                  <h2>
-                    <span>Department</span>
-                  </h2>
-                  <p>
-                    At things that don't make sense, we couldn't react to a lot
-                    of life.
-                  </p>
-                  <Link to="/CompanyLogin"></Link>
+                  <h1>Department</h1>
+                  <p>Login as Company</p>
+                  <Link to="/CompanyLogin" />
                 </figcaption>
               </figure>
             </Col>

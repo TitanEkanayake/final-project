@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: center;
 }
+.hero-container1 h1 {
+  color: #fff;
+}
+
 
 figure.snip0016 {
   font-family: "Raleway", Arial, sans-serif;

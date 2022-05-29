@@ -54,7 +54,7 @@ const CustomerRes = () => {
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
-            <Card.Text>{card.service}</Card.Text>
+            <Card.Text>{card.email}</Card.Text>
             <Card.Text>{card.time}</Card.Text>
             <Button
               variant="primary"

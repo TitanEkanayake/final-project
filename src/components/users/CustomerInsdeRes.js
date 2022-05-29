@@ -32,7 +32,7 @@ const CustomerInsdeRes = () => {
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
-            <Card.Text>{card.description}</Card.Text>
+            <Card.Text>{card.Description}</Card.Text>
             <Button
               onClick={() => navigate(`/Comtemp1/${card.id}/${id}`)}
               variant="primary"
@@ -49,7 +49,6 @@ const CustomerInsdeRes = () => {
     <div className="hero-container6">
       <div className="hero-container-welcome">
         <h1>Welcome</h1>
-        <p>Cylon Hospitals.LTD</p>
       </div>
       <div className="cards">
         {loading && <div>Loading...</div>}
