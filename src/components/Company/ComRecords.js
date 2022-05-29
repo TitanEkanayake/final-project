@@ -39,7 +39,7 @@ const ComRecords = () => {
           <td>{table.email}</td>
           <td>{table.address}</td>
           <td>{table.number}</td>
-          <td>{table.service}</td>
+          <td>{table.serviceName}</td>
           <td>
             {new Date(table.datetime.seconds * 1000).toLocaleDateString(
               "en-US"

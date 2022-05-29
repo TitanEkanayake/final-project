@@ -123,11 +123,6 @@ const App = () => {
         <Route path="/Selection" element={<Selection />} />
         <Route path="/Customerlogin" element={<CustomerLogin />} />
         <Route path="/Companylogin" element={<CompanyLogin />} />
-        <Route path="/ComDash" element={<ComDash />} />
-        <Route path="/ComProfile" element={<ComProfile />} />
-        <Route path="/ComRecords" element={<ComRecords />} />
-        <Route path="/ComResSelec" element={<ComResSelec />} />
-        <Route path="/Comtemp2" element={<Comtemp2 />} />
       </Routes>
       {enableNav() && <Footer />}
     </div>
