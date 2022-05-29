@@ -99,7 +99,7 @@ const App = () => {
           <Route path="/walkthrough" element={<Walkthrough />} />
           <Route path="/ComDash" element={<ComDash />} />
           <Route path="/ComProfile" element={<ComProfile />} />
-          <Route path="/Comtemp1/:cardid/:id" element={<Comtemp1 />} />
+          <Route path="/Comtemp1/:cardid/:id/:Sname/" element={<Comtemp1 />} />
           <Route path="/Comtemp2" element={<Comtemp2 />} />
           <Route path="/ComRecords" element={<ComRecords />} />
           <Route path="/ComResSelec/:id" element={<ComResSelec />} />

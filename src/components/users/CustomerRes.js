@@ -53,9 +53,18 @@ const CustomerRes = () => {
         <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
-            <Card.Title>{card.name}</Card.Title>
+            <Card.Title>{card.serviceName}</Card.Title>
             <Card.Text>{card.email}</Card.Text>
-            <Card.Text>{card.time}</Card.Text>
+            <Card.Text>
+              {new Date(card.datetime.seconds * 1000).toLocaleDateString(
+                "en-US"
+              )}
+            </Card.Text>
+            <Card.Text>
+              {new Date(card.datetime.seconds * 1000).toLocaleTimeString(
+                "en-US"
+              )}
+            </Card.Text>
             <Button
               variant="primary"
               onClick={() => {

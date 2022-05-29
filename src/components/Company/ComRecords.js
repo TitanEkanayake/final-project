@@ -40,6 +40,16 @@ const ComRecords = () => {
           <td>{table.address}</td>
           <td>{table.number}</td>
           <td>{table.service}</td>
+          <td>
+            {new Date(table.datetime.seconds * 1000).toLocaleDateString(
+              "en-US"
+            )}
+          </td>
+          <td>
+            {new Date(table.datetime.seconds * 1000).toLocaleTimeString(
+              "en-US"
+            )}
+          </td>
         </tr>
       </>
     );
@@ -55,6 +65,8 @@ const ComRecords = () => {
             <th>Address</th>
             <th>Number</th>
             <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>
