@@ -92,7 +92,7 @@ const CustomerRes = () => {
             </Card.Text>
             <Card.Text>{card.time}</Card.Text>
             <Button variant="primary" onClick={saveFilePDf}>
-              download
+              Download PDF
             </Button>
             <span />
             <Button

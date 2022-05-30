@@ -42,7 +42,19 @@ const CustomerInsdeRes = () => {
                 )
               }
               variant="primary"
-              placeholder="First Name"
+            >
+              Manul Reserve
+            </Button>
+            <span />
+            <Button
+              onClick={() =>
+                navigate(
+                  `/Comtemp2/${card.id}/${id}/${card.name}/${card.date}/${
+                    card.time
+                  }/${card.toTime}`
+                )
+              }
+              variant="primary"
             >
               Reserve
             </Button>

@@ -103,7 +103,10 @@ const App = () => {
             path="/Comtemp1/:cardid/:id/:Sname/:date/:time/:totime"
             element={<Comtemp1 />}
           />
-          <Route path="/Comtemp2" element={<Comtemp2 />} />
+          <Route
+            path="/Comtemp2/:cardid/:id/:Sname/:date/:time/:totime"
+            element={<Comtemp2 />}
+          />
           <Route path="/ComRecords" element={<ComRecords />} />
           <Route path="/ComResSelec/:id" element={<ComResSelec />} />
           <Route path="/Selection" element={<Selection />} />

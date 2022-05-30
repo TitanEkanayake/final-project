@@ -41,15 +41,9 @@ const ComRecords = () => {
           <td>{table.number}</td>
           <td>{table.serviceName}</td>
           <td>
-            {new Date(table.datetime.seconds * 1000).toLocaleDateString(
-              "en-US"
-            )}
+            {new Date(table.date.seconds * 1000).toLocaleDateString("en-US")}
           </td>
-          <td>
-            {new Date(table.datetime.seconds * 1000).toLocaleTimeString(
-              "en-US"
-            )}
-          </td>
+          <td>{table.time}</td>
         </tr>
       </>
     );
