@@ -46,7 +46,7 @@ const Comtemp2 = () => {
   });
   // create
   const create = async () => {
-    if ((!number, !aCddress)) alert("Please Update your Profile!");
+    if ((!number, !address)) alert("Please Update your Profile!");
     else {
       try {
         await addDoc(usersCollectionRef, {
