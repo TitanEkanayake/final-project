@@ -12,6 +12,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { jsPDF } from "jspdf";
 
 const CustomerRes = () => {
   const [user] = useAuthState(auth);
@@ -48,6 +49,37 @@ const CustomerRes = () => {
   };
 
   const renderCard = (card) => {
+    //PDF
+    const saveFilePDf = () => {
+      const date = new Date(card.date.seconds * 1000).toLocaleDateString(
+        "en-US"
+      );
+      const pdfData = [
+        "                            RESERVATION.LK",
+        "\n",
+        "Customer name = ",
+        card.name,
+        "\n",
+        "Service name = ",
+        card.serviceName,
+        "\n",
+        "Date = ",
+        date,
+        "\n",
+        "Time = ",
+        card.time,
+        "\n",
+        "Resferance ID = ",
+        card.serviceId,
+        "\n",
+        "email = ",
+        card.email,
+      ];
+      const doc = new jsPDF();
+
+      doc.text(pdfData, 10, 10);
+      doc.save("Reservation.LK.pdf");
+    };
     return (
       <>
         <Card style={{ width: "18rem", margin: "10px" }}>
@@ -59,6 +91,10 @@ const CustomerRes = () => {
               {new Date(card.date.seconds * 1000).toLocaleDateString("en-US")}
             </Card.Text>
             <Card.Text>{card.time}</Card.Text>
+            <Button variant="primary" onClick={saveFilePDf}>
+              download
+            </Button>
+            <span />
             <Button
               variant="primary"
               onClick={() => {
