@@ -35,7 +35,11 @@ const CustomerInsdeRes = () => {
             <Card.Text>{card.Description}</Card.Text>
             <Button
               onClick={() =>
-                navigate(`/Comtemp1/${card.id}/${id}/${card.name}`)
+                navigate(
+                  `/Comtemp1/${card.id}/${id}/${card.name}/${card.date}/${
+                    card.time
+                  }/${card.toTime}`
+                )
               }
               variant="primary"
               placeholder="First Name"

@@ -20,7 +20,6 @@ const ComResSelec = () => {
   const uid = user ? user.uid : null;
   const usersCollectionRef = collection(db, "company", uid, "service");
   const navigate = useNavigate();
-  newDate.toString();
 
   const create = async () => {
     if ((!newName, !newDis)) alert("Please enter name!");
@@ -79,9 +78,12 @@ const ComResSelec = () => {
             </div>
             <div className={styles.form_group}>
               <label className="control-label col-md-2">Date</label>
-              <DatePicker
-                selected={newDate}
-                onChange={(date) => setnewDate(date)}
+              <input
+                className="form-control"
+                type="date"
+                onChange={(event) => {
+                  setnewDate(event.target.value);
+                }}
               />
             </div>
             <br />

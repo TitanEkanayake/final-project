@@ -12,40 +12,27 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/Firebase_con";
 import { useNavigate, useParams } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DateTimePicker from "@mui/lab/DateTimePicker";
-import Stack from "@mui/material/Stack";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import TimePicker from "react-bootstrap-time-picker";
+import { timeFromInt } from "time-number";
 
 export const Comtemp1 = () => {
   const [user] = useAuthState(auth);
-  const { cardid, id, Sname } = useParams();
+  const { cardid, id, Sname, date, time, totime } = useParams();
   const [newEmail, setNewEmail] = useState();
   const [newNumber, setNewnumber] = useState();
   const [value, setValue] = React.useState(new Date());
+  const [tvalue, settValue] = useState("");
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
-  const [newdate, setNewdate] = useState("");
   const uid = user ? user.uid : null;
   const usersCollectionRef = collection(db, "bookings");
   const navigate = useNavigate();
   value.toString();
-
-  const fetchdate = async () => {
-    await getDoc(doc(db, "company", id, "service", cardid)).then((doc) => {
-      console.log("service data:", doc.data(), doc.id);
-    });
-    // onSnapshot(doc(db, "company", id, "service", cardid),(doc) => {
-    //   console.log("service data:", doc.data(), doc.id);
-    // })
-  };
-  useEffect(() => {
-    fetchdate();
-  }, []);
 
   const create = async () => {
     if ((!newName, !newAddress)) alert("Please enter name!");
@@ -55,7 +42,8 @@ export const Comtemp1 = () => {
           name: newName,
           address: newAddress,
           uid,
-          datetime: value,
+          date: value,
+          time: timeFromInt(tvalue, { format: 12 }),
           email: newEmail,
           number: newNumber,
           compId: id,
@@ -109,20 +97,31 @@ export const Comtemp1 = () => {
             <br />
             <div className={styles.form_group}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Stack spacing={3}>
-                  <DateTimePicker
-                    renderInput={(params) => <TextField {...params} />}
-                    label="Select a date"
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    minDate={new Date("2020-02-14")}
-                    minTime={new Date(0, 0, 0, 8)}
-                    maxTime={new Date(0, 0, 0, 18, 45)}
-                  />
-                </Stack>
+                <DatePicker
+                  label="Basic example"
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                  minDate={new Date(date)}
+                />
               </LocalizationProvider>
+            </div>
+            <br />
+            <div className={styles.form_group}>
+              <label className="control-label col-md-2">Time</label>
+              <div className="col-md-7">
+                <TimePicker
+                  start={time}
+                  end={totime}
+                  step={30}
+                  value={tvalue}
+                  onChange={(newValue) => {
+                    settValue(newValue);
+                  }}
+                />
+              </div>
             </div>
             <br />
             <div className={styles.form_group}>

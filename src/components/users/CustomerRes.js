@@ -56,15 +56,9 @@ const CustomerRes = () => {
             <Card.Title>{card.serviceName}</Card.Title>
             <Card.Text>{card.email}</Card.Text>
             <Card.Text>
-              {new Date(card.datetime.seconds * 1000).toLocaleDateString(
-                "en-US"
-              )}
+              {new Date(card.date.seconds * 1000).toLocaleDateString("en-US")}
             </Card.Text>
-            <Card.Text>
-              {new Date(card.datetime.seconds * 1000).toLocaleTimeString(
-                "en-US"
-              )}
-            </Card.Text>
+            <Card.Text>{card.time}</Card.Text>
             <Button
               variant="primary"
               onClick={() => {
