@@ -21,4 +21,10 @@ export const SidebarData = [
     icon: <AiIcons.AiFillBook />,
     cName: "nav-text",
   },
+  {
+    title: "ContactUs",
+    path: "/Contactus",
+    icon: <AiIcons.AiFillBook />,
+    cName: "nav-text",
+  },
 ];

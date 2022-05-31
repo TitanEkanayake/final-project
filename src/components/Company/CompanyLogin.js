@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { auth, logInWithEmailAndPassword } from "../../firebase/Firebase_con";
 import "./CompanyLogin.css";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Modal from "../pages/Popup";
 
 function CompanyLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (loading) {
@@ -83,7 +84,16 @@ function CompanyLogin() {
                 </div>
                 <div className="hr" />
                 <div className="foot-lnk">
-                  <a href="#forgot">Forgot Password?</a>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    Forget Password?
+                  </button>
+                  {modalOpen && <Modal setOpenModal={setModalOpen} />}
                 </div>
               </div>
             </div>

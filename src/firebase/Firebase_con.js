@@ -18,7 +18,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWx7ZrCpYATg5E53hrvhW1PU9-T5Dep2g",
@@ -93,6 +93,7 @@ const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent!");
+    window.location.reload(false);
   } catch (err) {
     console.error(err);
     alert(err.message);
