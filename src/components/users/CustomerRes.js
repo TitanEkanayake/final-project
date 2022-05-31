@@ -57,11 +57,14 @@ const CustomerRes = () => {
       const pdfData = [
         "                            RESERVATION.LK",
         "\n",
-        "Customer name = ",
-        card.name,
+        "Company name = ",
+        card.Companyname,
         "\n",
         "Service name = ",
         card.serviceName,
+        "\n",
+        "Customer name = ",
+        card.name,
         "\n",
         "Date = ",
         date,
@@ -70,7 +73,7 @@ const CustomerRes = () => {
         card.time,
         "\n",
         "Resferance ID = ",
-        card.serviceId,
+        card.id,
         "\n",
         "email = ",
         card.email,
@@ -85,12 +88,13 @@ const CustomerRes = () => {
         <Card style={{ width: "18rem", margin: "10px" }}>
           <Card.Img variant="top" src={card.image} />
           <Card.Body>
+            <Card.Title>{card.Companyname}</Card.Title>
             <Card.Title>{card.serviceName}</Card.Title>
-            <Card.Text>{card.email}</Card.Text>
             <Card.Text>
               {new Date(card.date.seconds * 1000).toLocaleDateString("en-US")}
             </Card.Text>
             <Card.Text>{card.time}</Card.Text>
+            <Card.Text>{card.id}</Card.Text>
             <Button variant="primary" onClick={saveFilePDf}>
               Download PDF
             </Button>

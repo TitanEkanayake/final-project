@@ -22,9 +22,23 @@ const Comtemp2 = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [number, setnumber] = useState("");
+  const [cName, setCname] = useState("");
   const usersCollectionRef = collection(db, "bookings");
   const navigate = useNavigate();
   value.toString();
+
+  // company
+  const cData = async () => {
+    try {
+      const q = query(collection(db, "company"), where("uid", "==", id));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setCname(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
 
   // fetching data
   const fetchData = async () => {
@@ -43,7 +57,9 @@ const Comtemp2 = () => {
   };
   useEffect(() => {
     fetchData();
+    cData();
   });
+
   // create
   const create = async () => {
     if ((!number, !address)) alert("Please Update your Profile!");
@@ -57,6 +73,7 @@ const Comtemp2 = () => {
           time: timeFromInt(tvalue, { format: 12 }),
           email: email,
           number: number,
+          Companyname: cName,
           compId: id,
           serviceName: Sname,
           serviceId: cardid,

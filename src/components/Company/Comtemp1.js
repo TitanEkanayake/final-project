@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Comtemp1.module.css";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase/Firebase_con";
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, addDoc, getDocs, where, query } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/Firebase_con";
 import { useNavigate, useParams } from "react-router-dom";
@@ -29,11 +23,28 @@ export const Comtemp1 = () => {
   const [tvalue, settValue] = useState("");
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
+  const [cName, setCname] = useState("");
   const uid = user ? user.uid : null;
   const usersCollectionRef = collection(db, "bookings");
   const navigate = useNavigate();
   value.toString();
+  //fetch data
+  const fetchData = async () => {
+    try {
+      const q = query(collection(db, "company"), where("uid", "==", id));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setCname(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  });
 
+  //create
   const create = async () => {
     if ((!newName, !newAddress)) alert("Please enter name!");
     else {
@@ -46,6 +57,7 @@ export const Comtemp1 = () => {
           time: timeFromInt(tvalue, { format: 12 }),
           email: newEmail,
           number: newNumber,
+          Companyname: cName,
           compId: id,
           serviceName: Sname,
           serviceId: cardid,

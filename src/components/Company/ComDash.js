@@ -55,6 +55,11 @@ export const ComDash = () => {
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>{card.Description}</Card.Text>
+            <Card.Text>
+              {card.date} -: {card.time} : {card.toTime}
+            </Card.Text>
+            <Card.Text />
+
             <div className={styles.Btncom1}>
               <Button
                 onClick={() => navigate(`/Compupdateform/${card.id}`)}
