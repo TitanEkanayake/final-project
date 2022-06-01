@@ -74,9 +74,6 @@ const CustomerRes = () => {
         "\n",
         "Resferance ID = ",
         card.id,
-        "\n",
-        "email = ",
-        card.email,
       ];
       const doc = new jsPDF();
 
@@ -114,6 +111,7 @@ const CustomerRes = () => {
   };
   return (
     <div className="hero-containery">
+      <h1>Your Reservations</h1>
       <Helmet>
         <style>{"body { background-color: lightblue; }"}</style>
       </Helmet>

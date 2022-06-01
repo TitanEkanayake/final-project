@@ -32,7 +32,7 @@ import RecordSelec from "./components/Company/RecordSelec";
 const navEnabled = [
   "/",
   "/aboutus",
-  "/Contactus",
+
   "/Selection",
   "/CustomerLogin",
   "/Companylogin",
@@ -45,6 +45,7 @@ const sideEnabled = [
   "CustomerResFrom",
   "Comtemp1",
   "Comtemp2",
+  "Contactus",
 ];
 const sideEnabled2 = [
   "ComDash",
