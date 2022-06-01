@@ -14,20 +14,22 @@ export const CProfileImage = () => {
   const [photoURL, setPhotoURL] = useState(image);
   const uid = User ? User.uid : null;
 
+  // upload
   async function upload(file, User, setLoading) {
     const fileRef = ref(storage, User.uid);
 
     setLoading(true);
 
     const snapshot = await uploadBytes(fileRef, file);
-    const photoURL = await getDownloadURL(fileRef);
+    const x = await getDownloadURL(fileRef);
 
-    updateProfile(User, { photoURL });
+    updateProfile(User, { photoURL: x });
 
     setLoading(false);
     alert("Uploaded file!");
     window.location.reload(false);
   }
+
   function handleChange(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0]);
@@ -44,6 +46,7 @@ export const CProfileImage = () => {
       setPhotoURL(User.photoURL);
     }
   }, [User]);
+
   return (
     <div className="four wide column profile-image">
       <img alt="avatar" className="avatar" src={photoURL} />

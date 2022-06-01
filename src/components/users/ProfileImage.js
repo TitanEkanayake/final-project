@@ -20,9 +20,9 @@ export const ProfileImage = () => {
     setLoading(true);
 
     const snapshot = await uploadBytes(fileRef, file);
-    const photoURL = await getDownloadURL(fileRef);
+    const x = await getDownloadURL(fileRef);
 
-    updateProfile(User, { photoURL });
+    updateProfile(User, { photoURL: x });
 
     setLoading(false);
     alert("Uploaded file!");
