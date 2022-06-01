@@ -14,6 +14,7 @@ export const ProfileImage = () => {
   const [photoURL, setPhotoURL] = useState(image);
   const uid = User ? User.uid : null;
 
+  // upload
   async function upload(file, User, setLoading) {
     const fileRef = ref(storage, User.uid);
 
@@ -23,6 +24,7 @@ export const ProfileImage = () => {
     const x = await getDownloadURL(fileRef);
 
     updateProfile(User, { photoURL: x });
+    await updateDoc(doc(db, "users", uid), { image: x });
 
     setLoading(false);
     alert("Uploaded file!");
@@ -36,7 +38,6 @@ export const ProfileImage = () => {
 
   function handleClick() {
     upload(photo, User, setLoading);
-    updateDoc(doc(db, "users", uid), { image: photoURL });
   }
 
   useEffect(() => {

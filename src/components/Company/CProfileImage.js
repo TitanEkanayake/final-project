@@ -24,6 +24,7 @@ export const CProfileImage = () => {
     const x = await getDownloadURL(fileRef);
 
     updateProfile(User, { photoURL: x });
+    await updateDoc(doc(db, "company", uid), { image: x });
 
     setLoading(false);
     alert("Uploaded file!");
@@ -38,7 +39,6 @@ export const CProfileImage = () => {
 
   function handleClick() {
     upload(photo, User, setLoading);
-    updateDoc(doc(db, "company", uid), { image: photoURL });
   }
 
   useEffect(() => {
