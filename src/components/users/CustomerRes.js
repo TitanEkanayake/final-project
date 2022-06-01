@@ -88,10 +88,12 @@ const CustomerRes = () => {
             <Card.Title>{card.Companyname}</Card.Title>
             <Card.Title>{card.serviceName}</Card.Title>
             <Card.Text>
+              {" "}
+              Date :-{" "}
               {new Date(card.date.seconds * 1000).toLocaleDateString("en-US")}
             </Card.Text>
-            <Card.Text>{card.time}</Card.Text>
-            <Card.Text>{card.id}</Card.Text>
+            <Card.Text>Time :- {card.time}</Card.Text>
+            <Card.Text>Referance ID -: {card.id}</Card.Text>
             <Button variant="primary" onClick={saveFilePDf}>
               Download PDF
             </Button>
