@@ -21,7 +21,7 @@ const CustomerInsdeRes = () => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   let navigate = useNavigate();
 
