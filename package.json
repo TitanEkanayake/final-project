@@ -39,7 +39,7 @@
     "react-router-bootstrap": "^0.26.0",
     "react-router-dom": "^6.2.1",
     "react-scoped-styles": "^0.5.5",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.0",
     "react-time-picker": "^4.5.0",
     "react-viewerjs": "^0.1.9",
     "reactjs-popup": "^2.0.5",
