@@ -20,7 +20,7 @@
     "dayjs": "^1.11.2",
     "file-saver": "^2.0.5",
     "firebase": "^9.6.8",
-    "firebase-admin": "^10.2.0",
+    "firebase-admin": "^12.0.0",
     "formik": "^2.2.9",
     "jspdf": "^2.5.1",
     "mdb-react-ui-kit": "^2.3.0",
