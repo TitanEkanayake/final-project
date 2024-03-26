@@ -4,8 +4,6 @@ import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../../firebase/Firebase_con";
 import { Link, useParams } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 
@@ -13,13 +11,9 @@ const ComUpdateForm = () => {
   const [user] = useAuthState(auth);
   const { register, setValue, handleSubmit } = useForm();
   const [userDocument, setUserDocument] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
   const { id } = useParams();
   const uid = user ? user.uid : null;
-  // data
-  const [newTime, setNewTime] = useState();
-  const [newTime1, setNewTime1] = useState();
-  // newDate.toString();
 
   useEffect(() => {
     const docRef = doc(db, "company", uid, "service", id);
@@ -33,21 +27,20 @@ const ComUpdateForm = () => {
       }
     });
     return unsubscribe;
-  }, [id, setValue]);
+  }, [id, setValue, uid]);
 
   const updateUserDocument = async (data) =>
     updateDoc(doc(db, "company", uid, "service", id), data);
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true);
       await updateUserDocument({ id: id, ...data });
       alert("Updated!");
     } catch (error) {
       console.log(error);
       alert("Theres a error!");
     } finally {
-      setLoading(false);
+      console.log("done");
     }
   };
 

@@ -11,7 +11,7 @@ import { ProfileImage } from "./ProfileImage";
 const CustomerProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
   const [userDocument, setUserDocument] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -30,13 +30,12 @@ const CustomerProfile = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true);
       await updateUserDocument({ uid: user?.uid, ...data });
       alert("Updated!");
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      console.log("done");
     }
   };
 

@@ -11,17 +11,18 @@ const CustomerInsdeRes = () => {
   const { id } = useParams();
   const userCollectionRef = collection(db, "company", id, "service");
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userCollectionRef);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setfiltered(dt);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getUsers();
-  }, [getUsers]);
+    const getUsers = async () => {
+      setLoading(true);
+      const data = await getDocs(userCollectionRef);
+      const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setfiltered(dt);
+      setLoading(false);
+    };
+    if (userCollectionRef) {
+      getUsers();
+    }
+  }, [userCollectionRef]);
 
   let navigate = useNavigate();
 

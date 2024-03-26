@@ -3,35 +3,36 @@ import "./CustomerDash.css";
 import { db } from "../../firebase/Firebase_con";
 import { Row, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { Helmet } from "react-helmet";
 
 function CustomerDash() {
   const [users, setusers] = useState([]);
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const userCollectionRef = collection(db, "company");
   const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userCollectionRef);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setusers(dt);
-    setfiltered(dt);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getUsers();
-  }, []);
+    const getUsers = async () => {
+      setLoading(true);
+      const data = await getDocs(userCollectionRef);
+      const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setusers(dt);
+      setfiltered(dt);
+      setLoading(false);
+    };
+    if (userCollectionRef) {
+      getUsers();
+    }
+  }, [userCollectionRef]);
 
   const search = (value) => {
     const items = [...users];
     const filtered = items.filter(
-      (e) => e.name.toLowerCase().search(value.toLowerCase()) != -1
+      (e) => e.name.toLowerCase().search(value.toLowerCase()) !== -1
     );
-    if (value == "") {
+    if (value === "") {
       setfiltered(users);
     } else {
       setfiltered(filtered);

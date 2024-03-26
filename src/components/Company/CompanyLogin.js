@@ -9,14 +9,10 @@ function CompanyLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
-
     const fetchClaims = async () => {
       const { claims } = await user.getIdTokenResult();
       if (claims?.admin) {
@@ -26,9 +22,8 @@ function CompanyLogin() {
         navigate("/companylogin");
       }
     };
-
     if (user) fetchClaims();
-  }, [user, loading]);
+  }, [user, navigate]);
 
   return (
     <div className="hero-containerx">

@@ -3,7 +3,7 @@ import { auth } from "./firebase/Firebase_con";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Aboutus from "./components/pages/Aboutus";
 import Navigationbar from "./components/layouts/Navigationbar";
@@ -58,28 +58,30 @@ const sideEnabled2 = [
 const App = () => {
   const { pathname } = useLocation();
   const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClaims = async () => {
       const { claims } = await user.getIdTokenResult();
-      // if(claims?.admin)
+      if (claims?.admin) {
+        console.log("admin");
+      }
     };
 
     if (user) fetchClaims();
   }, [user]);
 
   const enableNav = () =>
-    navEnabled.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !=
+    navEnabled.findIndex((e) => e.toLowerCase() === pathname.toLowerCase()) !==
     -1;
   const enableside = () =>
     sideEnabled.findIndex(
       (e) => e.toLowerCase() === pathname.split("/")[1].toLowerCase()
-    ) != -1;
+    ) !== -1;
   const enableside2 = () =>
     sideEnabled2.findIndex(
       (e) => e.toLowerCase() === pathname.split("/")[1].toLowerCase()
-    ) != -1;
+    ) !== -1;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>There was an error...</div>;
 

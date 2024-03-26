@@ -16,7 +16,7 @@ function CustomerLogin() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newName, setNewName] = useState("");
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [modalOpen, setModalOpen] = useState(false);
   const [initialTab, setInitialTab] = useState(true);
   const navigate = useNavigate();
@@ -25,11 +25,8 @@ function CustomerLogin() {
     if (!newName) alert("Please enter name");
     registerWithEmailAndPassword(newName, newEmail, newPassword);
   };
-  useEffect(() => {
-    if (loading) {
-      return;
-    }
 
+  useEffect(() => {
     const fetchClaims = async () => {
       const { claims } = await user.getIdTokenResult();
       if (claims?.admin) {
@@ -40,7 +37,7 @@ function CustomerLogin() {
     };
 
     if (user) fetchClaims();
-  }, [user, loading]);
+  }, [user, navigate]);
 
   return (
     <div className="hero-container2">

@@ -4,31 +4,33 @@ import styles from "./ComRecords.module.css";
 import Table from "react-bootstrap/Table";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const ComRecords = () => {
   const [user] = useAuthState(auth);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [filtered, setfiltered] = useState([]);
-  const { id } = useParams();
+  // const { id } = useParams();
   const userCollectionRef = collection(db, "bookings");
 
   //querie fuction
   const currentUser = user ? user.uid : null;
   const userdocs = query(userCollectionRef, where("compId", "==", currentUser));
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userdocs);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
-    setfiltered(dt);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getUsers();
-  }, []);
+    const getUsers = async () => {
+      try {
+        const data = await getDocs(userdocs);
+        const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        setfiltered(dt);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (currentUser) {
+      getUsers();
+    }
+  }, [currentUser, userdocs]);
 
   const renderTable = (table) => {
     return (

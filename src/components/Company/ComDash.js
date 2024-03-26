@@ -15,17 +15,18 @@ export const ComDash = () => {
   const uid = user ? user.uid : null;
   const userCollectionRef = collection(db, "company", uid, "service");
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userCollectionRef);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setfiltered(dt);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getUsers();
-  }, []);
+    const getUsers = async () => {
+      setLoading(true);
+      const data = await getDocs(userCollectionRef);
+      const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setfiltered(dt);
+      setLoading(false);
+    };
+    if (uid) {
+      getUsers();
+    }
+  }, [uid, userCollectionRef]);
 
   let navigate = useNavigate();
 

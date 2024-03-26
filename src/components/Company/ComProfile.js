@@ -11,7 +11,7 @@ import { CProfileImage } from "./CProfileImage";
 const ComProfile = () => {
   const { register, setValue, handleSubmit } = useForm();
   const [userDocument, setUserDocument] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -30,14 +30,12 @@ const ComProfile = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading(true);
       await updateComDocument({ uid: user?.uid, ...data });
       alert("Updated!");
     } catch (error) {
       console.log(error);
       alert("Theres a error!");
     } finally {
-      setLoading(false);
     }
   };
 

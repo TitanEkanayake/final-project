@@ -16,17 +16,18 @@ const RecordSelec = () => {
   const currentUser = user ? user.uid : null;
   const userdocs = query(userCollectionRef, where("uid", "==", currentUser));
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userdocs);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setfiltered(dt);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    getUsers();
-  }, []);
+    const getUsers = async () => {
+      setLoading(true);
+      const data = await getDocs(userdocs);
+      const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setfiltered(dt);
+      setLoading(false);
+    };
+    if (currentUser) {
+      getUsers();
+    }
+  }, [currentUser, userdocs]);
 
   let navigate = useNavigate();
 

@@ -6,12 +6,11 @@ import "./Popup.css";
 
 function Popup({ setOpenModal }) {
   const [email, setEmail] = useState("");
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (loading) return;
     if (user) navigate("/");
-  }, [user, loading]);
+  }, [user, navigate]);
   return (
     <div>
       <div className="modalBackground">

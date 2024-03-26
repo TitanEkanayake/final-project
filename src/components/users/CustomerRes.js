@@ -23,18 +23,6 @@ const CustomerRes = () => {
   const currentUser = user ? user.uid : null;
   const userdocs = query(userCollectionRef, where("uid", "==", currentUser));
 
-  const getUsers = async () => {
-    setLoading(true);
-    const data = await getDocs(userdocs);
-    const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setfiltered(dt);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
   // delete
   const deleteDocument = async (id) => {
     const userDoc = doc(db, "bookings", id);
@@ -47,6 +35,24 @@ const CustomerRes = () => {
         alert("Unable to delete Error!:" + error);
       });
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        setLoading(true);
+        const data = await getDocs(userdocs);
+        const dt = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        setfiltered(dt);
+        setLoading(false);
+      } catch (error) {
+        console.log();
+      }
+    };
+
+    if (currentUser) {
+      getUser();
+    }
+  }, [currentUser, userdocs]);
 
   const renderCard = (card) => {
     //PDF

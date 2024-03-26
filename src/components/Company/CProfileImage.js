@@ -1,4 +1,4 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref } from "firebase/storage";
 import React, { useState, useEffect } from "react";
 import { storage, auth, db } from "../../firebase/Firebase_con";
 import image from "../../assets/videos/profile-placeholder.png";
@@ -20,7 +20,7 @@ export const CProfileImage = () => {
 
     setLoading(true);
 
-    const snapshot = await uploadBytes(fileRef, file);
+    // const snapshot = await uploadBytes(fileRef, file);
     const x = await getDownloadURL(fileRef);
 
     updateProfile(User, { photoURL: x });

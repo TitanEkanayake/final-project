@@ -5,8 +5,7 @@ import { db } from "../../firebase/Firebase_con";
 import { collection, addDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/Firebase_con";
-import { useNavigate, useParams } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom";
 import TimePicker from "react-time-picker";
 import "react-datepicker/dist/react-datepicker.css";
 
